@@ -14,7 +14,7 @@
           </v-carousel-item>
       </v-carousel>
       <v-flex  offset-sm5 offset-xs3>
-      <v-btn round  large  color="primary" class="mt-3" dark>تسوق الآن</v-btn>
+      <v-btn round  large  color="primary" class="mt-3" dark @click="buttClick">تسوق الآن</v-btn>
       </v-flex>
       </v-flex>
     </v-layout>
@@ -23,7 +23,13 @@
 </template>
 
 <script>
-
+export default {
+methods : {
+  buttClick () {
+    this.$router.push('/Shop')
+  }
+}
+}
 </script>
 
 <style scoped>
