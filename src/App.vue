@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    
 
     <!-- nav drawer -->
     <v-navigation-drawer
@@ -47,11 +48,9 @@
   <div id="logos">
     <img class="logo" src="./assets/logo.png" >
   </div>
-<!-- main here -->
 
 
-      
-      
+<!-- main here -->    
 
     <v-content>
        <v-container fluid>
@@ -76,8 +75,6 @@ export default {
       {id: '3', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'},
       {id: '4', icon: 'store', title: 'المنتجات', link: '/Shop'},
       {id: '5', icon: 'home', title: 'الرئيسية', link: '/'}
-
-
     ]
   
   }),
