@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    
 
     <!-- nav drawer -->
     <v-navigation-drawer

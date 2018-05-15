@@ -6,11 +6,8 @@
     <v-layout row wrap>
       <v-flex sm6 xs12 offset-sm3>
         <v-carousel style="cursor: pointer;">
-          <v-carousel-item>
-          <img class="img" src="https://img2.exportersindia.com/product_images/bc-full/dir_93/2786565/sayer-dates-946949.jpg">
-          </v-carousel-item>
-          <v-carousel-item>
-          <img class="img" src="http://singaporeajwadates.com/wp-content/uploads/2017/11/Reshma-Dates-18.jpg">
+          <v-carousel-item v-for="item in carouselItems" :key="item.id">
+          <img class="img" :src="item.src">
           </v-carousel-item>
       </v-carousel>
       <v-flex  offset-sm5 offset-xs3>
@@ -24,6 +21,15 @@
 
 <script>
 export default {
+  data: () => ({
+    drawer: false,
+    carouselItems: 
+    [
+      {id: '1', title: 'productImage1', src: 'https://img2.exportersindia.com/product_images/bc-full/dir_93/2786565/sayer-dates-946949.jpg'},
+      {id: '2', title: 'ProductImage2', src: 'http://singaporeajwadates.com/wp-content/uploads/2017/11/Reshma-Dates-18.jpg'}
+    ]
+  
+  }),
 methods : {
   buttClick () {
     this.$router.push('/Shop')
