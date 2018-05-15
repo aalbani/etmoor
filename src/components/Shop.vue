@@ -11,8 +11,13 @@ under the box will have add to cart + count -->
         <h3 class="headline mb-2 mt-0" >تمر سكري</h3>
         </v-card-title>
         <v-card-actions>
-          <v-btn flat color="orange">Share</v-btn>
-          <v-btn flat color="orange">Explore</v-btn>
+          <v-btn fab dark small color="success" @click="addItemCount">
+          <v-icon dark>add</v-icon>
+          </v-btn>
+          <p id="quantityCounter">{{itemCount}}</p>
+          <v-btn fab dark small color="error" @click="subItemCount">
+          <v-icon dark>remove</v-icon>
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -23,7 +28,7 @@ under the box will have add to cart + count -->
   export default {
     data () {
       return {
-      
+      itemCount: 0
       }
     }
   }
