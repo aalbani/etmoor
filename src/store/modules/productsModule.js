@@ -1,7 +1,8 @@
 import firebase from '../firebase/firestore'
 
 const state = {
-  products: []
+  products: ['ll']
+
 }
 const mutations = {
   setProducts (state, payload) {
@@ -10,9 +11,7 @@ const mutations = {
 }
 const actions = {
   initProducts ({commit}) {
-    const arrayOfProducts = []
-    firebase.getProducts(arrayOfProducts)
-    commit('setProducts', arrayOfProducts)
+    firebase.getProducts([], cb => commit('setProducts', cb))
   }
 }
 const getters = {

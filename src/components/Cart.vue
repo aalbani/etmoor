@@ -1,14 +1,12 @@
 <template>
   <v-container grid-list-xs>
      <v-btn color="success" @click="logger">text</v-btn>
-     <p v-if="okey">{{products}}</p>
+     <main v-if="products"> {{products}}</main>
   </v-container>
-  
 </template>
 
 
 <script>
-import db from '../store/firebase/firestore'
     export default {
         data() {
             return {
@@ -17,13 +15,14 @@ import db from '../store/firebase/firestore'
         },
         computed: {
             products() {
-                this.$store.getters['products/getProducts']
+               return this.$store.getters['products/getProducts']
             }
         },
         methods: {
             logger(){
+                
                 this.okay = true
-                console.log(this.products)
+                
             }
         },
         created() {
