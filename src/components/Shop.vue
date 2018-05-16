@@ -38,7 +38,7 @@ under the box will have add to cart + count -->
       subItemCount() {
         if(this.itemCount !== 0)
         this.itemCount -=1
-      }
+      },
     }
   }
 </script>

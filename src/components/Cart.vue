@@ -1,4 +1,15 @@
+<template>
+   <main>store : {{sokry}}</main>
+</template>
 
 
-collected items from 
-shop with the count and the name
+<script>
+    export default {
+        computed: {
+            sokry() {
+                this.$store.getters.sokry
+                console.log(this.sokry)
+            }
+        }
+    }
+</script>
