@@ -1,15 +1,23 @@
 <template>
-   <main>store : {{sokry}}</main>
+   <main>store </main>
 </template>
 
 
 <script>
+import db from './Firebase/FirebaseInit'
     export default {
-        computed: {
-            sokry() {
-                this.$store.getters.sokry
-                console.log(this.sokry)
+        data() {
+            return {
+                products: []
             }
+        },
+        created() {
+         db.collection('PRODUCTS').get().then(query => {
+             query.forEach(doc => {
+                 console.log(doc.data())
+                 const data = doc
+             })
+         })
         }
     }
 </script>
