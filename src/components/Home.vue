@@ -14,11 +14,11 @@
           <!-- not loading -->
       <v-flex sm6 xs12 offset-sm3 v-if="!loading">
         <v-carousel style="cursor: pointer;">
-          <v-carousel-item v-for="item in carouselItems" :key="item.id">
-          <img class="img" :src="item.src">
+          <v-carousel-item v-for="product, index in products" :key="product.id">
+          <img class="img" :src="products[index].datImage">
           </v-carousel-item>
       </v-carousel>
-      <v-flex  offset-sm5 offset-xs3>
+      <v-flex class="text-md-center">
       <v-btn round  large  color="primary" class="mt-3" dark @click="buttClick">تسوق الآن</v-btn>
       </v-flex>
       </v-flex>
@@ -29,17 +29,12 @@
 
 <script>
 export default {
-  data: () => ({
-    carouselItems: 
-    [
-      {id: '1', title: 'productImage1', src: 'https://img2.exportersindia.com/product_images/bc-full/dir_93/2786565/sayer-dates-946949.jpg'},
-      {id: '2', title: 'ProductImage2', src: 'http://singaporeajwadates.com/wp-content/uploads/2017/11/Reshma-Dates-18.jpg'}
-    ]
-  
-  }),
 computed : {
   loading() {
     return this.$store.getters['products/getLoading']
+  },
+  products() {
+    return this.$store.getters['products/getProducts']
   }
 },
 methods : {
