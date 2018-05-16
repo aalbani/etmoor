@@ -4,7 +4,7 @@
 
 
 <script>
-import db from './Firebase/FirebaseInit'
+import db from '../store/firebase/firestore'
     export default {
         data() {
             return {
@@ -12,12 +12,7 @@ import db from './Firebase/FirebaseInit'
             }
         },
         created() {
-         db.collection('PRODUCTS').get().then(query => {
-             query.forEach(doc => {
-                 console.log(doc.data())
-                 const data = doc
-             })
-         })
+         db
         }
     }
 </script>
