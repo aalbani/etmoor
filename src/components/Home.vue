@@ -4,7 +4,15 @@
   <v-app>
   <v-container fluid>
     <v-layout row wrap>
-      <v-flex sm6 xs12 offset-sm3>
+    
+              
+          <!-- loading? -->
+    <v-flex xs12 v-if="loading" class="text-md-center">
+    <v-progress-circular :size="70" :width="7" indeterminate color="green"></v-progress-circular>
+    </v-flex>
+
+          <!-- not loading -->
+      <v-flex sm6 xs12 offset-sm3 v-if="!loading">
         <v-carousel style="cursor: pointer;">
           <v-carousel-item v-for="item in carouselItems" :key="item.id">
           <img class="img" :src="item.src">
@@ -29,11 +37,19 @@ export default {
     ]
   
   }),
+computed : {
+  loading() {
+    return this.$store.getters['products/getLoading']
+  }
+},
 methods : {
   buttClick () {
     this.$router.push('/Shop')
-  },
+  }
 },
+created () {
+  this.$store.dispatch('products/initProducts')  
+}
 
 }
 </script>

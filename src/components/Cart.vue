@@ -24,9 +24,6 @@
                 this.okay = true
                 
             }
-        },
-        created() {
-            this.$store.dispatch('products/initProducts')
         }
     }
 </script>
