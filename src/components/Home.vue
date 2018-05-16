@@ -22,7 +22,6 @@
 <script>
 export default {
   data: () => ({
-    drawer: false,
     carouselItems: 
     [
       {id: '1', title: 'productImage1', src: 'https://img2.exportersindia.com/product_images/bc-full/dir_93/2786565/sayer-dates-946949.jpg'},
@@ -33,8 +32,9 @@ export default {
 methods : {
   buttClick () {
     this.$router.push('/Shop')
-  }
-}
+  },
+},
+
 }
 </script>
 
