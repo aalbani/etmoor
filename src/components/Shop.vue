@@ -1,14 +1,14 @@
 <template>
 <!-- boxes that display a ppic (if fb has 0 will give pic of unav)
 under the box will have add to cart + count -->
-  <v-layout>
-    <v-flex xs6>
+  <v-layout row>
+    <v-flex xs4 v-for="product, index in products" :key="product.id">
       <v-card hover>
-        <v-card-media src="https://4.imimg.com/data4/YT/WF/MY-2/mazafati-dates-500x500.jpg" 
+        <v-card-media :src="products[index].datImage" 
         height="300px">
         </v-card-media>
         <v-card-title primary-title class="justify-center">
-        <h3 class="headline mb-2 mt-0" >تمر سكري</h3>
+        <h3 class="headline mb-2 mt-0" >kk</h3>
         </v-card-title>
         <v-card-actions class="justify-center">
           <v-btn fab dark small color="success" @click="addItemCount">
@@ -20,6 +20,7 @@ under the box will have add to cart + count -->
           </v-btn>
         </v-card-actions>
       </v-card>
+       <v-spacer></v-spacer>
     </v-flex>
   </v-layout>
 </template>
@@ -29,6 +30,16 @@ under the box will have add to cart + count -->
     data () {
       return {
       itemCount: 0
+      }
+    },
+    computed: {
+      products() {
+        return this.$store.getters['products/getProducts']
+      }
+    },
+    created () {
+      if (!this.products){
+      this.$store.dispatch('products/initProducts')  
       }
     },
     methods: {

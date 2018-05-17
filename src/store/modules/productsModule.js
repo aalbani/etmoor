@@ -1,7 +1,7 @@
 import firebase from '../firebase/firestore'
 
 const state = {
-  products: [],
+  products: null,
   loading: false
 }
 const mutations = {
