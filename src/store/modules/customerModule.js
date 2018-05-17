@@ -28,6 +28,14 @@ const actions = {
       commit('setLoading', false)
     }
     )
+  },
+  getQuantity ({commit, getters}, dateType) {
+    if (dateType === 'sokry') {
+      return getters.sokryQuant
+    }
+    if (dateType === 'khalas') {
+      return getters.khalasQuant
+    }
   }
 }
 const getters = {
@@ -43,7 +51,6 @@ const getters = {
   getSokryQuant (state) {
     return state.sokryQuant
   }
-
 }
 
 export default {
