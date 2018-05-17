@@ -12,6 +12,12 @@ const mutations = {
   },
   setLoading (state, payload) {
     state.loading = payload
+  },
+  setKhalasQuant (state, payload) {
+    state.khalasQuant = payload
+  },
+  setSokryQuant (state, payload) {
+    state.sokryQuant = payload
   }
 }
 const actions = {
@@ -30,7 +36,14 @@ const getters = {
   },
   getLoading (state) {
     return state.loading
+  },
+  getKhalasQuant (state) {
+    return state.khalasQuant
+  },
+  getSokryQuant (state) {
+    return state.sokryQuant
   }
+
 }
 
 export default {

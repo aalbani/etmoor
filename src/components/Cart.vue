@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-xs>
      <v-btn color="success" @click="logger">text</v-btn>
-     <main v-if="products"> {{products}}</main>
+     <main v-if="customer"> {{customer}}</main>
   </v-container>
 </template>
 
@@ -14,15 +14,16 @@
             }
         },
         computed: {
-            products() {
-               return this.$store.getters['products/getProducts']
+            customer() {
+               return this.$store.getters['customer/getCustomer']
             }
         },
         methods: {
             logger(){
                 
                 this.okay = true
-                
+                this.$store.dispatch('customer/initCustomer')
+                console.log(this.$store.getters['customer/getCustomer'])
             }
         }
     }

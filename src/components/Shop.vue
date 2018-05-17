@@ -24,11 +24,11 @@ under the box will have add to cart + count -->
                 </v-card-media>
                 <v-card-actions>
                   <v-btn block color="secondary" dark>اضف الى السلة</v-btn>
-                  <v-btn flat icon color="secondary">
+                  <v-btn flat icon color="secondary" @click="addDate(product.Type)">
                     <v-icon>keyboard_arrow_up</v-icon>
                   </v-btn>
-                  <span class="headline black--text" v-text="itemCount"></span>
-                  <v-btn flat icon color="secondary">
+                  <span class="headline black--text" v-text="dateCount(product.Type)"></span>
+                  <v-btn flat icon color="secondary" @click="subDate(product.Type)">
                     <v-icon>keyboard_arrow_down</v-icon>
                   </v-btn>
                   <span class="headline black--text" v-text="product.arabicTitle"></span>
@@ -51,6 +51,9 @@ under the box will have add to cart + count -->
     computed: {
       products() {
         return this.$store.getters['products/getProducts']
+      },
+      dateCount() {
+        
       }
     },
     created () {
