@@ -27,7 +27,7 @@ under the box will have add to cart + count -->
                   <v-btn flat icon color="secondary" @click="addDate(product.Type)">
                     <v-icon>keyboard_arrow_up</v-icon>
                   </v-btn>
-                  <span class="headline black--text" v-text="dateCount(product.Type)"></span>
+                  <p>{{dateCount(product.Type)}}</p>
                   <v-btn flat icon color="secondary" @click="subDate(product.Type)">
                     <v-icon>keyboard_arrow_down</v-icon>
                   </v-btn>
@@ -51,9 +51,6 @@ under the box will have add to cart + count -->
     computed: {
       products() {
         return this.$store.getters['products/getProducts']
-      },
-      dateCount() {
-        
       }
     },
     created () {
@@ -62,13 +59,15 @@ under the box will have add to cart + count -->
       }
     },
     methods: {
-      addItemCount() {
-        this.itemCount +=1
+      dateCount(dateType) {
+        this.$store.dispatch('customer/dateCount', dateType)
       },
-      subItemCount() {
-        if(this.itemCount !== 0)
-        this.itemCount -=1
+      addDate(dateType) {
+        this.$store.dispatch('customer/addDate', dateType)
       },
+      subDate(dateType) {
+        this.$store.dispatch('customer/subDate', dateType)
+      }
     }
   }
 </script>

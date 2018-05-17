@@ -29,12 +29,32 @@ const actions = {
     }
     )
   },
-  getQuantity ({commit, getters}, dateType) {
+  dateCount ({commit, getters}, dateType) {
     if (dateType === 'sokry') {
-      return getters.sokryQuant
+      return getters.getSokryQuant
     }
     if (dateType === 'khalas') {
-      return getters.khalasQuant
+      return getters.getKhalasQuant
+    }
+  },
+  addDate ({commit, getters}, dateType) {
+    if (dateType === 'sokry') {
+      const x = getters.getSokryQuant
+      commit('setSokryQuant', (x + 1))
+    }
+    if (dateType === 'khalas') {
+      const y = getters.getKhalasQuant
+      commit('setKhalasQuant', (y + 1))
+    }
+  },
+  subDate ({commit, getters}, dateType) {
+    const x = getters.getSokryQuant
+    const y = getters.getKhalasQuant
+    if (dateType === 'sokry' && x !== 0) {
+      commit('setSokryQuant', (x - 1))
+    }
+    if (dateType === 'khalas' && y !== 0) {
+      commit('setKhalasQuant', (y - 1))
     }
   }
 }
