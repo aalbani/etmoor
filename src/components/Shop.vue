@@ -1,27 +1,43 @@
 <template>
 <!-- boxes that display a ppic (if fb has 0 will give pic of unav)
 under the box will have add to cart + count -->
-  <v-layout row>
-    <v-flex xs4 v-for="product, index in products" :key="product.id">
-      <v-card hover>
-        <v-card-media :src="products[index].datImage" 
-        height="300px">
-        </v-card-media>
-        <v-card-title primary-title class="justify-center">
-        <h3 class="headline mb-2 mt-0" >kk</h3>
-        </v-card-title>
-        <v-card-actions class="justify-center">
-          <v-btn fab dark small color="success" @click="addItemCount">
-          <v-icon dark>add</v-icon>
-          </v-btn>
-          <p id="quantityCounter">{{itemCount}}</p>
-          <v-btn fab dark small color="error" @click="subItemCount">
-          <v-icon dark>remove</v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-       <v-spacer></v-spacer>
-    </v-flex>
+  
+  <v-layout row wrap>
+    <v-spacer></v-spacer>
+    
+    
+        <v-container fluid grid-list-md>
+          <v-layout row wrap>
+            <v-flex
+              v-for="product in products" :key="product.id">
+              <v-card>
+                <v-card-media
+                  :src="product.datImage"
+                  height="250px"
+                >
+                  <v-container fill-height fluid>
+                    <v-layout fill-height>
+                      <v-flex xs12  align-end flexbox>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-card-media>
+                <v-card-actions>
+                  <v-btn block color="secondary" dark>اضف الى السلة</v-btn>
+                  <v-btn flat icon color="secondary">
+                    <v-icon>keyboard_arrow_up</v-icon>
+                  </v-btn>
+                  <span class="headline black--text" v-text="itemCount"></span>
+                  <v-btn flat icon color="secondary">
+                    <v-icon>keyboard_arrow_down</v-icon>
+                  </v-btn>
+                  <span class="headline black--text" v-text="product.arabicTitle"></span>
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-container>
+
   </v-layout>
 </template>
 

@@ -14,8 +14,8 @@
           <!-- not loading -->
       <v-flex sm6 xs12 offset-sm3 v-if="!loading">
         <v-carousel style="cursor: pointer;">
-          <v-carousel-item v-for="product, index in products" :key="product.id">
-          <img class="img" :src="products[index].datImage">
+          <v-carousel-item v-for="product in products" :key="product.id">
+          <img class="img" :src="product.datImage">
           </v-carousel-item>
       </v-carousel>
       <v-flex class="text-md-center">
