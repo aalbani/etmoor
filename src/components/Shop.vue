@@ -57,13 +57,17 @@ under the box will have add to cart + count -->
       if (!this.products){
       this.$store.dispatch('products/initProducts')  
       }
+      if (!this.$store.getters['customer/getCustomer']){
+      this.$store.dispatch('customer/initCustomer')  
+      }
     },
     methods: {
       dateCount(dateType) {
-        this.$store.dispatch('customer/dateCount', dateType)
+        return this.$store.dispatch('customer/dateCount', dateType)
       },
       addDate(dateType) {
-        this.$store.dispatch('customer/addDate', dateType)
+        this.$store.dispatch('customer/addDate', dateType )
+        console.log(this.$store.getters['customer/getCustomer'])
       },
       subDate(dateType) {
         this.$store.dispatch('customer/subDate', dateType)

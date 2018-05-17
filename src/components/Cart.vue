@@ -22,8 +22,8 @@
             logger(){
                 
                 this.okay = true
-                this.$store.dispatch('customer/initCustomer')
-                console.log(this.$store.getters['customer/getCustomer'])
+                this.$store.dispatch('customer/dateCount', 'sokry')
+                console.log(this.$store.dispatch('customer/dateCount', 'sokry'))
             }
         }
     }
