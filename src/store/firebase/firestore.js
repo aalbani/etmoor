@@ -31,7 +31,7 @@ export default {
       khalas: customer.khalas
     })
     .then(response => {
-      console.log(response)
+      console.log('success')
     })
     .catch(error => console.log(error))
   }

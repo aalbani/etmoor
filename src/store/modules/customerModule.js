@@ -1,10 +1,18 @@
 import firebase from '../firebase/firestore'
 
 const state = {
-  customer: null,
-  loading: false,
-  khalasQuant: 0,
-  sokryQuant: 0
+  customer: {
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    country: '',
+    city: '',
+    hood: '',
+    sokry: 0,
+    khalas: 0
+  },
+  loading: false
 }
 const mutations = {
   setCustomer (state, payload) {
@@ -12,29 +20,18 @@ const mutations = {
   },
   setLoading (state, payload) {
     state.loading = payload
-  },
-  setKhalasQuant (state, payload) {
-    state.khalasQuant = payload
-  },
-  setSokryQuant (state, payload) {
-    state.sokryQuant = payload
   }
 }
 const actions = {
-  initCustomer ({commit}) {
-    commit('setLoading', true)
-    firebase.getCustomer([], cb => {
-      commit('setCustomer', cb)
-      commit('setLoading', false)
-    }
-    )
+  addNewCustomer ({getters}) {
+    firebase.addCustomer(getters.getCustomer)
   },
   dateCount ({commit, getters}, dateType) {
     if (dateType === 'sokry') {
-      return getters.getSokryQuant
+      return getters.getCustomer.sokry
     }
     if (dateType === 'khalas') {
-      return getters.getKhalasQuant
+      return getters.getCustomer.khalas
     }
   },
   addDate ({commit, getters}, dateType) {
@@ -64,12 +61,6 @@ const getters = {
   },
   getLoading (state) {
     return state.loading
-  },
-  getKhalasQuant (state) {
-    return state.khalasQuant
-  },
-  getSokryQuant (state) {
-    return state.sokryQuant
   }
 }
 

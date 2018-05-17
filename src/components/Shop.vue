@@ -57,9 +57,6 @@ under the box will have add to cart + count -->
       if (!this.products){
       this.$store.dispatch('products/initProducts')  
       }
-      if (!this.$store.getters['customer/getCustomer']){
-      this.$store.dispatch('customer/initCustomer')  
-      }
     },
     methods: {
       dateCount(dateType) {
