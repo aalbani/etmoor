@@ -22,7 +22,7 @@
             logger(){
                 
                 this.okay = true
-                this.$store.dispatch('customer/addNewCustomer')
+                console.log(this.$store.getters['products/getProducts'])
                
             }
         }

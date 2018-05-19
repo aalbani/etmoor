@@ -8,7 +8,7 @@ under the box will have add to cart + count -->
     
         <v-container fluid grid-list-md>
           <v-layout row wrap>
-            <v-flex
+            <v-flex xs12 sm6 md4
               v-for="product in products" :key="product.id">
               <v-card>
                 <v-card-media
@@ -24,11 +24,11 @@ under the box will have add to cart + count -->
                 </v-card-media>
                 <v-card-actions>
                   <v-btn block color="secondary" dark>اضف الى السلة</v-btn>
-                  <v-btn flat icon color="secondary" @click="addDate(product.Type)">
+                  <v-btn flat icon color="secondary" @click="addDate(product.dateType)">
                     <v-icon>keyboard_arrow_up</v-icon>
                   </v-btn>
-                  <p>{{dateCount(product.Type)}}</p>
-                  <v-btn flat icon color="secondary" @click="subDate(product.Type)">
+                  <p>{{counter(product.dateType)}}</p>
+                  <v-btn flat icon color="secondary" @click="subDate(product.dateType)">
                     <v-icon>keyboard_arrow_down</v-icon>
                   </v-btn>
                   <span class="headline black--text" v-text="product.arabicTitle"></span>
@@ -45,8 +45,9 @@ under the box will have add to cart + count -->
   export default {
     data () {
       return {
-      itemCount: 0
-      }
+        sokry: 0,
+        khalas:0
+    }
     },
     computed: {
       products() {
@@ -59,15 +60,14 @@ under the box will have add to cart + count -->
       }
     },
     methods: {
-      dateCount(dateType) {
-        return this.$store.dispatch('customer/dateCount', dateType)
-      },
       addDate(dateType) {
-        this.$store.dispatch('customer/addDate', dateType )
-        console.log(this.$store.getters['customer/getCustomer'])
+        this.dateType +1
       },
       subDate(dateType) {
-        this.$store.dispatch('customer/subDate', dateType)
+        this.dateType -1
+      },
+      counter(dateType) {
+        return this.dateType
       }
     }
   }
