@@ -19,7 +19,7 @@
           </v-carousel-item>
       </v-carousel>
       <v-flex class="text-md-center">
-      <v-btn round  large  color="primary" class="mt-3" dark @click="buttClick">تسوق الآن</v-btn>
+      <v-btn block  large  color="primary" class="mt-3" dark @click="buttClick">تسوق الآن</v-btn>
       </v-flex>
       </v-flex>
     </v-layout>
