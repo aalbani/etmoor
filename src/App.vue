@@ -1,63 +1,48 @@
 <template>
   <v-app>
 
-    <!-- nav drawer -->
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      app
-      temporary 
-      disable-resize-watcher
-      right
-    >
-      <v-list dense>
-        <v-list-tile @click="" v-for="item in reverseItems" :key="item.id" :to="item.link">
-          <v-list-tile-action>
-            <v-icon>{{item.icon}}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>{{item.title}}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
+    <!-- logo -->
+    <img id="logo"  class="hidden-xs-only" src="./assets/logo.png" height="100" width="100" @click="goHome">
 
-    <!-- toolbar -->
-  <v-toolbar color="secondary" absolute app dark >
-    <v-spacer></v-spacer>
-          <v-toolbar-items class="hidden-xs-only" >
-        <v-btn v-for="item in menuItems" :key="item.id" :to="item.link" flat class="secondary white--text">
+    <!-- BUTTONS ABOVE PAGE-->
+    <v-container fluid class="hidden-xs-only" >
+      <v-layout row wrap justify-end style="margin-right: 100px;">
+          <v-btn id="btn" v-for="item in menuItems" :key="item.id" :to="item.link" round class="primary white--text mt-5">
           {{item.title}}
           <v-icon right>{{item.icon}}</v-icon>
         </v-btn>
-      </v-toolbar-items>
-      
-      <v-spacer></v-spacer>
-      <v-toolbar-title style="cursor: pointer">إي-تمور</v-toolbar-title>
-      <v-toolbar-side-icon 
-      @click.stop="drawer = !drawer" 
-      class="hidden-sm-and-up">
-      </v-toolbar-side-icon>
-
-
+      </v-layout>
+    </v-container>
+    
+<!-- toolbar-->
+ <v-toolbar id="toolbar" color="primary" class="hidden-xs-only" absolute height="40px">
+    <v-spacer></v-spacer>
+    <v-toolbar-items >
+        <v-menu
+          transition="slide-y-transition"
+          bottom
+        >
+          <v-btn slot="activator" class="primary white--text" flat >
+           {{ shoppingCart.title }}
+           <v-icon>{{shoppingCart.icon}}</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile>
+              <v-list-tile-title>{{ menuItems[2].title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+    </v-toolbar-items>
     </v-toolbar>
 
     
-<!-- logo -->
-  <div id="logos">
-    <img class="logo" src="./assets/logo.png" >
-  </div>
 
-
-<!-- main here -->    
-
-    <v-content>
+<!-- router or contained component -->
+    <v-content id="content">
        <v-container fluid>
       <router-view></router-view>
        </v-container>
     </v-content>
- 
-  
       
 
   </v-app>
@@ -66,15 +51,14 @@
 <script>
 export default {
   data: () => ({
-    drawer: false,
   menuItems: 
     [
       {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'},
       {id: '2', icon: 'watch_later', title: 'التوصيل', link: '/Delivery'},
-      {id: '3', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'},
-      {id: '4', icon: 'store', title: 'المنتجات', link: '/Shop'},
-      {id: '5', icon: 'home', title: 'الرئيسية', link: '/'}
-    ]
+      {id: '3', icon: 'store', title: 'المنتجات', link: '/Shop'},
+      {id: '4', icon: 'home', title: 'الرئيسية', link: '/'}
+    ],
+  shoppingCart : {id: '3', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'}
   
   }),
   computed: {
@@ -82,24 +66,30 @@ export default {
         return this.menuItems.slice().reverse();
   }     
 },
+methods : {
+  goHome() {
+    this.$router.push('/')
+}
+},
   name: 'App'
 }
 </script>
 <style>
-.logo {
-  height: 150px;
-  width: 175px;
-  margin-top: 65px;
-  margin-bottom: 65px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  
+#logo {
+  position: absolute;
+  right: 60px;
+  top: 30px;
+  cursor: pointer;
 }
-#logos {
-  background-color: #C8E6C9;
-  margin-top: 55px;
-  margin-bottom: -60px;
+#btn {
+  top: 30px;
+  right: 50px
 
+}
+#toolbar {
+  top: 140px
+}
+#content {
+  margin-top: 150px
 }
 </style>
