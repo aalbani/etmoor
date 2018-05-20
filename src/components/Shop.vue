@@ -4,7 +4,7 @@ under the box will have add to cart + count -->
 <v-container grid-list-lg id="container">
 
   <v-layout row wrap>
-    <v-flex xs12 sm6 v-for="product in products" :key="product.id" >
+    <v-flex xs12 sm6 v-for="(product) in products" :key="product.id" >
       <v-card>
         <v-card-media
         height="200px"
@@ -19,8 +19,8 @@ under the box will have add to cart + count -->
         </div>
         </v-card-title>
         <v-card-actions class="justify-center">
-              <v-dialog  v-show="true" persistent max-width="290">
-                <v-btn slot="activator" color="primary" large outline dark>اضافة الى السلة</v-btn>
+          <v-btn @click="addToBasket(product)" color="primary" large outline dark>اضافة الى السلة</v-btn>
+              <v-dialog v-model="dialog" persistent max-width="290">
                 <v-card >
                   <v-card-title class="headline">{{product.dateType}}</v-card-title>
                   <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
@@ -44,7 +44,19 @@ under the box will have add to cart + count -->
     data () {
       return {
         dialog: false,
+        addIndex: -1,
+        addProduct: {
+          dateType : '',
+          arabicTitle : '',
+          datImage: '',
+          
+        }
     }
+    },
+    watch: {
+      dialog (val) {
+        val || this.close()
+      }
     },
     computed: {
       products() {
@@ -57,14 +69,13 @@ under the box will have add to cart + count -->
       }
     },
     methods: {
-      addDate(dateType) {
-        this.dateType +1
+      close() {
+        this.dialog = false
       },
-      subDate(dateType) {
-        this.dateType -1
-      },
-      counter(dateType) {
-        return this.dateType
+      addToBasket(product) {
+        this.addIndex = this.products.indexOf(product)
+        this.addProduct = Object.assign({}, product)
+        this.dialog = true
       }
     }
   }

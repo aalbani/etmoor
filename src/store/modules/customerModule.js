@@ -9,8 +9,7 @@ const state = {
     country: '',
     city: '',
     hood: '',
-    sokry: 0,
-    khalas: 0
+    order: null
   },
   loading: false
 }
