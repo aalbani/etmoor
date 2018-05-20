@@ -1,52 +1,37 @@
 <template>
 <!-- boxes that display a ppic (if fb has 0 will give pic of unav)
 under the box will have add to cart + count -->
-  
-  <v-layout row wrap>
-    <v-spacer></v-spacer>
-    
-    
-        <v-container fluid grid-list-md>
-          <v-layout row wrap>
-            <v-flex xs12 sm6 md4
-              v-for="product in products" :key="product.id">
-              <v-card>
-                <v-card-media
-                  :src="product.datImage"
-                  height="250px"
-                >
-                  <v-container fill-height fluid>
-                    <v-layout fill-height>
-                      <v-flex xs12  align-end flexbox>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-media>
-                <v-card-actions>
-                  <v-btn block color="secondary" dark>اضف الى السلة</v-btn>
-                  <v-btn flat icon color="secondary" @click="addDate(product.dateType)">
-                    <v-icon>keyboard_arrow_up</v-icon>
-                  </v-btn>
-                  <p>{{counter(product.dateType)}}</p>
-                  <v-btn flat icon color="secondary" @click="subDate(product.dateType)">
-                    <v-icon>keyboard_arrow_down</v-icon>
-                  </v-btn>
-                  <span class="headline black--text" v-text="product.arabicTitle"></span>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
+<v-container grid-list-lg id="container">
 
+  <v-layout row wrap>
+    <v-flex xs12 sm6 v-for="product in products" :key="product.id">
+      <v-card>
+        <v-card-media
+        height="200px"
+        width="200px"
+        >
+        <img :src="product.datImage">
+        </v-card-media>
+        <v-card-title primary-title class="justify-center">
+        <div>
+         <h3> {{product.arabicTitle}} </h3>
+         <h3> {{product.arabicTitle}} </h3>
+        </div>
+        </v-card-title>
+        <v-card-actions>
+          <v-btn block outline color="primary">اضف الى السلة</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
   </v-layout>
+  
+</v-container>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        sokry: 0,
-        khalas:0
     }
     },
     computed: {
@@ -77,11 +62,7 @@ under the box will have add to cart + count -->
 h3 {
   font-family: 'Tajawal', sans-serif;
   font-weight: bold ;
-  font-size: xx-large
+  font-size: large
 }
-#quantityCounter {
-  font-family: 'Tajawal', sans-serif;
-  font-weight: bold ;
-  font-size: xx-large
-}
+
 </style>

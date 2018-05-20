@@ -5,7 +5,7 @@
     <img id="logo"  class="hidden-xs-only" src="./assets/logo.png" height="100" width="100" @click="goHome">
 
     <!-- BUTTONS ABOVE PAGE-->
-    <v-container fluid class="hidden-xs-only" >
+    <v-container id="contain" fluid class="hidden-xs-only" >
       <v-layout row wrap justify-end style="margin-right: 100px;">
           <v-btn id="btn" v-for="item in menuItems" :key="item.id" :to="item.link" round class="primary white--text mt-5">
           {{item.title}}
@@ -39,9 +39,9 @@
 
 <!-- router or contained component -->
     <v-content id="content">
-       <v-container fluid>
+      
       <router-view></router-view>
-       </v-container>
+       
     </v-content>
       
 
@@ -87,9 +87,9 @@ methods : {
 
 }
 #toolbar {
-  top: 140px
+  top: 140px;
 }
 #content {
-  margin-top: 150px
+  margin-top: 100px
 }
 </style>
