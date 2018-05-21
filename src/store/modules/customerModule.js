@@ -23,6 +23,9 @@ const mutations = {
   addOrder (state, payload) {
     state.customer.order.push(payload)
     console.log(state.customer.order)
+  },
+  confirmedOrder (state, payload) {
+    state.customer.order = payload
   }
 }
 const actions = {
@@ -32,6 +35,9 @@ const actions = {
   newOrder ({commit, getters}, order) {
     const oldList = getters.orderList
     commit('addOrder', order)
+  },
+  confirmedOrder ({commit}, order) {
+    commit('confirmedOrder', order)
   }
 }
 const getters = {

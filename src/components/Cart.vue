@@ -2,7 +2,7 @@
         
 <v-container fluid>
     <v-layout row wrap>
-      <v-flex xs6>
+      <v-flex xs4>
         <v-card v-for="order in orderList" :key="order.dateType">
             <v-card-media
               contain
@@ -35,6 +35,7 @@
         
       </v-flex>
     </v-layout>
+    <v-btn v-if="orderList.length > 0" @click="completePurchase(orderList)" large color="primary" dark>اتمام الشراء</v-btn>
 </v-container>
 
      
@@ -60,6 +61,11 @@
             deleteOrder (order) {
                const index = this.orderList.indexOf(order)
                confirm('are you sure ?') && this.orderList.splice(index, 1)
+               console.log(this.orderList)
+            },
+            completePurchase(orderList) {
+                this.$store.dispatch('customer/confirmedOrder')
+                this.$router.push('/OrderForm')
             }
         }
     }
