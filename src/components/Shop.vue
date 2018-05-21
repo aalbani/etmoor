@@ -8,15 +8,15 @@ under the box will have add to cart + count -->
     <v-card>
         <v-card-title class="headline justify-center">{{addProduct.arabicTitle}}</v-card-title>
         <v-layout row wrap class="justify-center">
-        <v-btn icon color="error"><v-icon dark>remove</v-icon></v-btn>
+        <v-btn icon color="error" @click="removeQuantity"><v-icon dark>remove</v-icon></v-btn>
         <v-subheader style="font-size: 35px" v-model="quantity">{{quantity}}</v-subheader>
-        <v-btn icon color="success"><v-icon dark>add</v-icon></v-btn>
+        <v-btn icon color="success" @click="addQuantity"><v-icon dark>add</v-icon></v-btn>
       
         </v-layout>
 
         <v-card-actions class="justify-start mt-3">
-          <v-btn color="green darken-1" flat @click.native="">إلغاء</v-btn>
-          <v-btn color="green darken-1" flat  @click.native="">اضف الى السلة</v-btn>
+          <v-btn color="green darken-1" flat @click.native="cancel">إلغاء</v-btn>
+          <v-btn color="green darken-1" flat  @click.native="addToBasket(addProduct, quantity)">اضف الى السلة</v-btn>
     </v-card-actions>
       </v-card>
     </v-dialog>
@@ -85,6 +85,13 @@ under the box will have add to cart + count -->
         this.addIndex = this.products.indexOf(product)
         this.addProduct = Object.assign({}, product)
         this.dialog = true
+      },
+      addQuantity() {
+        this.quantity += 1
+      },
+      removeQuantity() {
+        if (this.quantity > 0)
+        this.quantity -=1
       }
     }
   }
