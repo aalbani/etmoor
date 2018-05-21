@@ -7,15 +7,19 @@ under the box will have add to cart + count -->
    <v-dialog v-model="dialog" persistent max-width="290">
     <v-card>
         <v-card-title class="headline justify-center">{{addProduct.arabicTitle}}</v-card-title>
-        <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat @click.native="dialog = false">Disagree</v-btn>
-          <v-btn color="green darken-1" flat @click.native="dialog = false">Agree</v-btn>
+        <v-layout row wrap class="justify-center">
+        <v-btn small icon color="error"><v-icon dark>remove</v-icon></v-btn>
+        <h1>{{addProduct.quantity}}</h1>
+        <v-btn small icon color="success"><v-icon dark>add</v-icon></v-btn>
+      
+        </v-layout>
+
+        <v-card-actions class="justify-start">
+          <v-btn color="green darken-1" flat small @click.native="dialog = false">إلغاء</v-btn>
+          <v-btn color="green darken-1" flat small @click.native="dialog = false">اضف الى السلة</v-btn>
     </v-card-actions>
       </v-card>
     </v-dialog>
-
 
 
   <v-layout row wrap>
@@ -53,7 +57,8 @@ under the box will have add to cart + count -->
           dateType : '',
           arabicTitle : '',
           datImage: '',
-          quantity: 0,
+          quantity: 1,
+          price: 0,
         }
     }
     },
