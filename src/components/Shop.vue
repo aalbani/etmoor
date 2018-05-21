@@ -8,15 +8,15 @@ under the box will have add to cart + count -->
     <v-card>
         <v-card-title class="headline justify-center">{{addProduct.arabicTitle}}</v-card-title>
         <v-layout row wrap class="justify-center">
-        <v-btn small icon color="error"><v-icon dark>remove</v-icon></v-btn>
-        <h1>{{addProduct.quantity}}</h1>
-        <v-btn small icon color="success"><v-icon dark>add</v-icon></v-btn>
+        <v-btn icon color="error"><v-icon dark>remove</v-icon></v-btn>
+        <v-subheader style="font-size: 35px" v-model="quantity">{{quantity}}</v-subheader>
+        <v-btn icon color="success"><v-icon dark>add</v-icon></v-btn>
       
         </v-layout>
 
-        <v-card-actions class="justify-start">
-          <v-btn color="green darken-1" flat small @click.native="dialog = false">إلغاء</v-btn>
-          <v-btn color="green darken-1" flat small @click.native="dialog = false">اضف الى السلة</v-btn>
+        <v-card-actions class="justify-start mt-3">
+          <v-btn color="green darken-1" flat @click.native="">إلغاء</v-btn>
+          <v-btn color="green darken-1" flat  @click.native="">اضف الى السلة</v-btn>
     </v-card-actions>
       </v-card>
     </v-dialog>
@@ -38,7 +38,7 @@ under the box will have add to cart + count -->
         </div>
         </v-card-title>
         <v-card-actions class="justify-center">
-          <v-btn @click="addToBasket(product)" color="primary" large outline dark>اضافة الى السلة</v-btn>
+          <v-btn @click="basketModal(product)" color="primary" large outline dark>اضافة الى السلة</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -53,11 +53,11 @@ under the box will have add to cart + count -->
       return {
         dialog: false,
         addIndex: -1,
+        quantity: 0,
         addProduct: {
           dateType : '',
           arabicTitle : '',
           datImage: '',
-          quantity: 1,
           price: 0,
         }
     }
@@ -81,7 +81,7 @@ under the box will have add to cart + count -->
       close() {
         this.dialog = false
       },
-      addToBasket(product) {
+      basketModal(product) {
         this.addIndex = this.products.indexOf(product)
         this.addProduct = Object.assign({}, product)
         this.dialog = true
