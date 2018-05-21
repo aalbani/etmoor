@@ -9,7 +9,7 @@ const state = {
     country: '',
     city: '',
     hood: '',
-    order: null
+    order: [{}]
   },
   loading: false
 }
