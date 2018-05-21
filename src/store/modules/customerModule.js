@@ -9,7 +9,7 @@ const state = {
     country: '',
     city: '',
     hood: '',
-    order: [{}]
+    order: []
   },
   loading: false
 }
@@ -29,7 +29,8 @@ const actions = {
   addNewCustomer ({getters}) {
     firebase.addCustomer(getters.getCustomer)
   },
-  newOrder ({commit}, order) {
+  newOrder ({commit, getters}, order) {
+    const oldList = getters.orderList
     commit('addOrder', order)
   }
 }
@@ -39,6 +40,9 @@ const getters = {
   },
   getLoading (state) {
     return state.loading
+  },
+  orderList (state) {
+    return state.customer.order
   }
 }
 

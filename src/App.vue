@@ -21,16 +21,32 @@
         <v-menu
           transition="slide-y-transition"
           bottom
+          allow-overflow
+          full-width
         >
           <v-btn slot="activator" class="primary white--text" flat >
            {{ shoppingCart.title }}
            <v-icon>{{shoppingCart.icon}}</v-icon>
           </v-btn>
           <v-list>
-            <v-list-tile>
-              <v-list-tile-title>{{ menuItems[2].title }}</v-list-tile-title>
+            <v-subheader>الطلبات</v-subheader>
+            <v-list-tile  v-for="(item, index) in basketItems" :key="index">
+            <v-list-tile-avatar>
+              <img :src="item.datImage">
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title v-html="item.arabicTitle"></v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-layout row wrap>
+              <v-subheader>السعر:  {{item.price}}</v-subheader>
+              <v-subheader>الكمية: {{item.quantity}}</v-subheader>
+              </v-layout>
+            </v-list-tile-action>
+
             </v-list-tile>
           </v-list>
+          <v-btn block :to="shoppingCart.link" color="primary" dark><v-icon>arrow_back</v-icon> <v-spacer></v-spacer> تأكيد الطلب والخروج</v-btn>
         </v-menu>
     </v-toolbar-items>
     </v-toolbar>
@@ -62,8 +78,8 @@ export default {
   
   }),
   computed: {
-    reverseItems() {
-        return this.menuItems.slice().reverse();
+    basketItems () {
+     return this.$store.getters['customer/orderList']
   }     
 },
 methods : {
