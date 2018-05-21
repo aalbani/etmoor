@@ -11,9 +11,7 @@ under the box will have add to cart + count -->
         <v-btn icon color="error" @click="removeQuantity"><v-icon dark>remove</v-icon></v-btn>
         <v-subheader style="font-size: 35px" v-model="quantity">{{quantity}}</v-subheader>
         <v-btn icon color="success" @click="addQuantity"><v-icon dark>add</v-icon></v-btn>
-      
         </v-layout>
-
         <v-card-actions class="justify-start mt-3">
           <v-btn flat @click.native="cancel">إلغاء</v-btn>
           <v-btn :disabled="quantity < 1" flat  @click.native="addToBasket(addProduct, quantity)">اضف الى السلة</v-btn>
@@ -21,6 +19,17 @@ under the box will have add to cart + count -->
       </v-card>
     </v-dialog>
 
+    <v-snackbar
+      id="snackbar"
+      :timeout="timeout"
+      bottom
+      vertical
+      v-model="snackbar"
+      color="success"
+    >
+       تم اضافة طلبكم بنجاح
+      <v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
+    </v-snackbar>
 
   <v-layout row wrap>
     <v-flex xs6 sm4 lg3 v-for="(product) in products" :key="product.id" >
@@ -59,7 +68,9 @@ under the box will have add to cart + count -->
           arabicTitle : '',
           datImage: '',
           price: 0,
-        }
+        },
+        snackbar : false,
+        timeout : 3000
     }
     },
     watch: {
@@ -107,6 +118,7 @@ under the box will have add to cart + count -->
         }
         console.log(order)
         this.$store.dispatch('customer/newOrder', order)
+        this.snackbar = true
         this.cancel()
       }
     }
