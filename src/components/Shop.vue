@@ -15,8 +15,8 @@ under the box will have add to cart + count -->
         </v-layout>
 
         <v-card-actions class="justify-start mt-3">
-          <v-btn color="green darken-1" flat @click.native="cancel">إلغاء</v-btn>
-          <v-btn color="green darken-1" flat  @click.native="addToBasket(addProduct, quantity)">اضف الى السلة</v-btn>
+          <v-btn flat @click.native="cancel">إلغاء</v-btn>
+          <v-btn :disabled="quantity < 1" flat  @click.native="addToBasket(addProduct, quantity)">اضف الى السلة</v-btn>
     </v-card-actions>
       </v-card>
     </v-dialog>
@@ -70,7 +70,7 @@ under the box will have add to cart + count -->
     computed: {
       products() {
         return this.$store.getters['products/getProducts']
-      }
+      },
     },
     created () {
       if (!this.products){
@@ -92,6 +92,22 @@ under the box will have add to cart + count -->
       removeQuantity() {
         if (this.quantity > 0)
         this.quantity -=1
+      },
+      cancel() {
+        this.quantity = 0,
+        this.close()
+      },
+      addToBasket(product, quantity) {
+        const order = {
+          dateType : product.dateType,
+          arabicTitle : product.arabicTitle,
+          datImage : product.datImage,
+          price : product.price,
+          quantity : quantity
+        }
+        console.log(order)
+        this.$store.dispatch('customer/newOrder', order)
+        this.cancel()
       }
     }
   }

@@ -19,39 +19,18 @@ const mutations = {
   },
   setLoading (state, payload) {
     state.loading = payload
+  },
+  addOrder (state, payload) {
+    state.customer.order.push(payload)
+    console.log(state.customer.order)
   }
 }
 const actions = {
   addNewCustomer ({getters}) {
     firebase.addCustomer(getters.getCustomer)
   },
-  dateCount ({commit, getters}, dateType) {
-    if (dateType === 'sokry') {
-      return getters.getCustomer.sokry
-    }
-    if (dateType === 'khalas') {
-      return getters.getCustomer.khalas
-    }
-  },
-  addDate ({commit, getters}, dateType) {
-    if (dateType === 'sokry') {
-      const x = getters.getSokryQuant
-      commit('setSokryQuant', (x + 1))
-    }
-    if (dateType === 'khalas') {
-      const y = getters.getKhalasQuant
-      commit('setKhalasQuant', (y + 1))
-    }
-  },
-  subDate ({commit, getters}, dateType) {
-    const x = getters.getSokryQuant
-    const y = getters.getKhalasQuant
-    if (dateType === 'sokry' && x !== 0) {
-      commit('setSokryQuant', (x - 1))
-    }
-    if (dateType === 'khalas' && y !== 0) {
-      commit('setKhalasQuant', (y - 1))
-    }
+  newOrder ({commit}, order) {
+    commit('addOrder', order)
   }
 }
 const getters = {
