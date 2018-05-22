@@ -11,6 +11,7 @@ const state = {
     hood: '',
     order: []
   },
+  orderList: [],
   loading: false
 }
 const mutations = {
@@ -21,11 +22,10 @@ const mutations = {
     state.loading = payload
   },
   addOrder (state, payload) {
-    state.customer.order.push(payload)
-    console.log(state.customer.order)
+    state.orderList.push(payload)
   },
-  confirmedOrder (state, payload) {
-    state.customer.order = payload
+  confirmedOrder (state) {
+    state.customer.order.push(state.orderList)
   }
 }
 const actions = {
@@ -33,11 +33,10 @@ const actions = {
     firebase.addCustomer(getters.getCustomer)
   },
   newOrder ({commit, getters}, order) {
-    const oldList = getters.orderList
     commit('addOrder', order)
   },
-  confirmedOrder ({commit}, order) {
-    commit('confirmedOrder', order)
+  confirmedOrder ({commit}) {
+    commit('confirmedOrder')
   }
 }
 const getters = {
@@ -48,7 +47,7 @@ const getters = {
     return state.loading
   },
   orderList (state) {
-    return state.customer.order
+    return state.orderList
   }
 }
 

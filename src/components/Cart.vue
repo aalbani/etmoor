@@ -35,7 +35,7 @@
         
       </v-flex>
     </v-layout>
-    <v-btn v-if="orderList.length > 0" @click="completePurchase(orderList)" large color="primary" dark>اتمام الشراء</v-btn>
+    <v-btn v-if="orderList.length > 0" @click="completePurchase" large color="primary" dark>اتمام الشراء</v-btn>
 </v-container>
 
      
@@ -63,9 +63,9 @@
                confirm('are you sure ?') && this.orderList.splice(index, 1)
                console.log(this.orderList)
             },
-            completePurchase(orderList) {
+            completePurchase() {
                 this.$store.dispatch('customer/confirmedOrder')
-                this.$router.push('/OrderForm')
+                this.$router.push('/Order_Form')
             }
         }
     }
