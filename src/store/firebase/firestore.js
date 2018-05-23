@@ -28,7 +28,7 @@ export default {
       country: customer.country,
       city: customer.city,
       hood: customer.hood,
-      order: customer.order.array
+      order: customer.order
     })
     .then(response => {
       console.log('success')

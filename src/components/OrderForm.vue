@@ -84,7 +84,7 @@ export default {
 
   }),
   methods : {
-          submit () {
+         async submit () {
         if (this.$refs.form.validate()) {
           
             const newCustomer = {
@@ -96,7 +96,7 @@ export default {
               city: this.city,
               hood: this.hood,
             }
-            this.$store.dispatch('customer/setNewCustomer', newCustomer)
+          await this.$store.dispatch('customer/setNewCustomer', newCustomer)
             this.$store.dispatch('customer/addNewCustomer')
           }
         }
