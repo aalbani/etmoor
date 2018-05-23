@@ -11,7 +11,8 @@ export default {
           'arabicTitle': document.data().arabicTitle,
           'datImage': document.data().datImage,
           'dateQuantity': document.data().dateQuantity,
-          'dateType': document.data().dateType
+          'dateType': document.data().dateType,
+          'price': document.data().price
         }
         array.push(data)
       })
@@ -27,7 +28,7 @@ export default {
       country: customer.country,
       city: customer.city,
       hood: customer.hood,
-      order: customer.order
+      order: customer.order.array
     })
     .then(response => {
       console.log('success')

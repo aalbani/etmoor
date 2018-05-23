@@ -16,16 +16,25 @@ const state = {
 }
 const mutations = {
   setCustomer (state, payload) {
-    state.customer = payload
+    state.customer.firstName = payload.firstName
+    state.customer.lastName = payload.lastName
+    state.customer.phoneNumber = payload.phoneNumber
+    state.customer.email = payload.email
+    state.customer.country = payload.country
+    state.customer.city = payload.city
+    state.customer.hood = payload.hood
+    console.log(state.customer)
   },
   setLoading (state, payload) {
     state.loading = payload
   },
   addOrder (state, payload) {
     state.orderList.push(payload)
+    console.log(state.orderList)
   },
   confirmedOrder (state) {
     state.customer.order.push(state.orderList)
+    console.log(state.customer.order)
   }
 }
 const actions = {
@@ -37,6 +46,9 @@ const actions = {
   },
   confirmedOrder ({commit}) {
     commit('confirmedOrder')
+  },
+  setNewCustomer ({commit}, newCustomer) {
+    commit('setCustomer', newCustomer)
   }
 }
 const getters = {

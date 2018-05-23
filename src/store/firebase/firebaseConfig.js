@@ -5,5 +5,4 @@ export default {
   projectId: 'etmoor-f5f1c',
   storageBucket: 'etmoor-f5f1c.appspot.com',
   messagingSenderId: '427591939010'
-
 }

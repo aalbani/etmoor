@@ -43,7 +43,7 @@ under the box will have add to cart + count -->
         <v-card-title primary-title class="justify-center">
         <div class="headline">
          <h4> {{product.arabicTitle}} </h4>
-         <h4> {{product.arabicTitle}} </h4>
+         <h4> {{product.price}} </h4>
         </div>
         </v-card-title>
         <v-card-actions class="justify-center">
