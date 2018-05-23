@@ -9,7 +9,7 @@ const state = {
     country: '',
     city: '',
     hood: '',
-    order: []
+    order: null
   },
   orderList: [],
   loading: false
@@ -33,7 +33,7 @@ const mutations = {
     console.log(state.orderList)
   },
   confirmedOrder (state) {
-    state.customer.order.push(state.orderList)
+    state.customer.order = state.orderList
     console.log(state.customer.order)
   }
 }
