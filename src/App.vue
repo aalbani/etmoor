@@ -1,20 +1,52 @@
 <template>
-  <v-app>
+  <v-app id="bigContainer">
 
-    <!-- logo -->
+    <!-- logo 
     <img id="logo"  class="hidden-xs-only" src="./assets/logo.png" height="100" width="100" @click="goHome">
+-->
 
-    <!-- BUTTONS ABOVE PAGE-->
-    <v-container id="contain" fluid class="hidden-xs-only" >
-      <v-layout row wrap justify-end style="margin-right: 100px;">
-          <v-btn id="btn" v-for="item in menuItems" :key="item.id" :to="item.link" round class="primary white--text mt-5">
-          {{item.title}}
-          <v-icon right>{{item.icon}}</v-icon>
-        </v-btn>
-      </v-layout>
-    </v-container>
+
+    <v-navigation-drawer  temporary absolute  v-model="sideNav" disable-resize-watcher>
+      <v-list>
+        <v-list-tile @click="" v-for="item in menuItems" :key="item.title" :to="item.link">
+          <v-list-tile-action >
+            <v-icon>{{item.icon}}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>{{item.title}}</v-list-tile-content>
+        </v-list-tile>
+        </v-list>
+    </v-navigation-drawer>
     
-<!-- toolbar-->
+
+    <v-toolbar absolute app dark class="error" height="100">
+      <v-toolbar-side-icon @click="sideNav = !sideNav" class="hidden-sm-and-up"></v-toolbar-side-icon>
+      <v-toolbar-title><router-link to="/" tag="span" style="cursor: pointer">ETMOOR</router-link></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn flat v-for="item in menuItems" :key="item.title" :to="item.link">
+          <v-icon left>{{item.icon}}</v-icon>
+          {{item.title}}
+        </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+  
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbar
  <v-toolbar id="toolbar" color="primary" class="hidden-xs-only" absolute height="40px">
     <v-spacer></v-spacer>
     <v-toolbar-items >
@@ -50,16 +82,14 @@
         </v-menu>
     </v-toolbar-items>
     </v-toolbar>
-
-    
-
-<!-- router or contained component -->
+-->
+<!-- router or contained component 
     <v-content id="content">
       
       <router-view></router-view>
        
     </v-content>
-      
+-->
 
   </v-app>
 </template>
@@ -74,7 +104,8 @@ export default {
       {id: '3', icon: 'store', title: 'المنتجات', link: '/Shop'},
       {id: '4', icon: 'home', title: 'الرئيسية', link: '/'}
     ],
-  shoppingCart : {id: '3', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'}
+  shoppingCart : {id: '3', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'},
+  sideNav : false
   
   }),
   computed: {
@@ -91,21 +122,7 @@ methods : {
 }
 </script>
 <style>
-#logo {
-  position: absolute;
-  right: 60px;
-  top: 30px;
-  cursor: pointer;
-}
-#btn {
-  top: 30px;
-  right: 50px
-
-}
-#toolbar {
-  top: 140px;
-}
-#content {
-  margin-top: 100px
+#bigContainer {
+  background-color: #F3D3B8
 }
 </style>
