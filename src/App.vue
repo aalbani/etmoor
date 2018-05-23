@@ -1,12 +1,8 @@
 <template>
   <v-app id="bigContainer">
 
-    <!-- logo 
-    <img id="logo"  class="hidden-xs-only" src="./assets/logo.png" height="100" width="100" @click="goHome">
--->
 
-
-    <v-navigation-drawer  temporary absolute  v-model="sideNav" disable-resize-watcher>
+    <v-navigation-drawer right temporary absolute  v-model="sideNav" disable-resize-watcher>
       <v-list>
         <v-list-tile @click="" v-for="item in menuItems" :key="item.title" :to="item.link">
           <v-list-tile-action >
@@ -14,18 +10,32 @@
           </v-list-tile-action>
           <v-list-tile-content>{{item.title}}</v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="" :to="shoppingCart.link">
+          <v-list-tile-action>
+            <v-icon>{{shoppingCart.icon}}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            {{shoppingCart.title}}
+          </v-list-tile-content>
+        </v-list-tile>
         </v-list>
     </v-navigation-drawer>
     
 
-    <v-toolbar absolute app dark class="error" height="100">
+    <v-toolbar absolute app dark color="error" height="100">
       <v-toolbar-side-icon @click="sideNav = !sideNav" class="hidden-sm-and-up"></v-toolbar-side-icon>
-      <v-toolbar-title><router-link to="/" tag="span" style="cursor: pointer">ETMOOR</router-link></v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-toolbar-title class="justify-right"><router-link id="toolbarTitle" to="/" tag="span">إي - تمور</router-link></v-toolbar-title>
       <v-toolbar-items class="hidden-xs-only">
         <v-btn flat v-for="item in menuItems" :key="item.title" :to="item.link">
-          <v-icon left>{{item.icon}}</v-icon>
+          <v-icon right>{{item.icon}}</v-icon>
           {{item.title}}
+        </v-btn>
+      </v-toolbar-items>
+      <v-spacer></v-spacer>
+      <v-toolbar-items id="shopingCart" class="hidden-xs-only">  
+        <v-btn flat large>
+          <v-icon right>{{shoppingCart.icon}}</v-icon>
+          {{shoppingCart.title}}
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -99,12 +109,14 @@ export default {
   data: () => ({
   menuItems: 
     [
-      {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'},
-      {id: '2', icon: 'watch_later', title: 'التوصيل', link: '/Delivery'},
+      {id: '4', icon: 'home', title: 'الرئيسية', link: '/'},
       {id: '3', icon: 'store', title: 'المنتجات', link: '/Shop'},
-      {id: '4', icon: 'home', title: 'الرئيسية', link: '/'}
+      {id: '2', icon: 'watch_later', title: 'التوصيل', link: '/Delivery'},
+      {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'}
+
+      
     ],
-  shoppingCart : {id: '3', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'},
+  shoppingCart : {id: '0', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'},
   sideNav : false
   
   }),
@@ -123,6 +135,15 @@ methods : {
 </script>
 <style>
 #bigContainer {
-  background-color: #F3D3B8
+  background-color: #F3D3B8;
+  direction: rtl
+}
+#toolbarTitle {
+  cursor: pointer;
+  font-family: 'Rakkas', cursive;
+  font-size: 40px
+}
+#shopingCart{
+  margin-left: 10%
 }
 </style>
