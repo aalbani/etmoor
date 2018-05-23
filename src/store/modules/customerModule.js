@@ -35,6 +35,9 @@ const mutations = {
   confirmedOrder (state) {
     state.customer.order = state.orderList
     console.log(state.customer.order)
+  },
+  topUpOrder (state, payload) {
+    state.orderList[payload.index].quantity += payload.toAdd
   }
 }
 const actions = {
@@ -42,7 +45,16 @@ const actions = {
     firebase.addCustomer(getters.getCustomer)
   },
   newOrder ({commit, getters}, order) {
-    commit('addOrder', order)
+    const oldOrder = getters.orderList
+    if (oldOrder.some(oldOrder => (oldOrder.dateType === order.dateType))) {
+      const payload = {
+      index: oldOrder.findIndex(oldOrder => oldOrder.dateType === order.dateType),
+      toAdd: order.quantity
+      }
+      commit('topUpOrder', payload)
+    } else {
+      commit('addOrder', order)
+    }
   },
   confirmedOrder ({commit}) {
     commit('confirmedOrder')
