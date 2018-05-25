@@ -37,11 +37,23 @@
           <v-icon right>{{shoppingCart.icon}}</v-icon>
           {{shoppingCart.title}}
         </v-btn>
-      <v-list>
-        <v-list-tile v-for="(item, index) in items" :key="index" >
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
+          <v-list>
+            <v-subheader class="text-text-center">الطلبات</v-subheader>
+            <v-list-tile  v-for="(item, index) in basketItems" :key="index">
+            <v-list-tile-avatar>
+              <img :src="item.datImage">
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title v-html="item.arabicTitle"></v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-layout row wrap>
+              <v-subheader>السعر:  {{item.price}}</v-subheader>
+              <v-subheader>الكمية: {{item.quantity}}</v-subheader>
+              </v-layout>
+            </v-list-tile-action>
+            </v-list-tile>
+          </v-list>
     </v-menu>
       </v-toolbar-items>
 
