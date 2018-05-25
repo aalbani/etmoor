@@ -5,7 +5,7 @@ under the box will have add to cart + count -->
 
 
    <v-dialog v-model="dialog" persistent max-width="290">
-    <v-card>
+    <v-card class="info">
         <v-card-title class="headline justify-center">{{addProduct.arabicTitle}}</v-card-title>
         <v-layout row wrap class="justify-center">
         <v-btn icon color="error" @click="removeQuantity"><v-icon dark>remove</v-icon></v-btn>

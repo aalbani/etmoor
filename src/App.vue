@@ -1,7 +1,6 @@
 <template>
   <v-app id="bigContainer">
 
-
     <v-navigation-drawer right temporary absolute  v-model="sideNav" disable-resize-watcher>
       <v-list>
         <v-list-tile @click="" v-for="item in menuItems" :key="item.title" :to="item.link">
@@ -20,7 +19,6 @@
         </v-list-tile>
         </v-list>
     </v-navigation-drawer>
-    
 
     <v-toolbar absolute app dark color="error" height="100">
       <v-toolbar-side-icon @click="sideNav = !sideNav" class="hidden-sm-and-up"></v-toolbar-side-icon>
@@ -32,74 +30,58 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
+      
       <v-toolbar-items id="shopingCart" class="hidden-xs-only">  
-        <v-btn flat large>
+      <v-menu open-on-hover bottom offset-y>
+      <v-btn slot="activator" class="error white--text text-xs-center" flat :to="shoppingCart.link">
           <v-icon right>{{shoppingCart.icon}}</v-icon>
           {{shoppingCart.title}}
         </v-btn>
+      <v-list>
+        <v-list-tile v-for="(item, index) in items" :key="index" >
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
       </v-toolbar-items>
+
     </v-toolbar>
   
   
- 
 
+<!-- router or contained component -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- toolbar
- <v-toolbar id="toolbar" color="primary" class="hidden-xs-only" absolute height="40px">
-    <v-spacer></v-spacer>
-    <v-toolbar-items >
-        <v-menu
-          transition="slide-y-transition"
-          bottom
-          allow-overflow
-          full-width
-        >
-          <v-btn slot="activator" class="primary white--text" flat >
-           {{ shoppingCart.title }}
-           <v-icon>{{shoppingCart.icon}}</v-icon>
-          </v-btn>
-          <v-list>
-            <v-subheader>الطلبات</v-subheader>
-            <v-list-tile  v-for="(item, index) in basketItems" :key="index">
-            <v-list-tile-avatar>
-              <img :src="item.datImage">
-            </v-list-tile-avatar>
-            <v-list-tile-content>
-              <v-list-tile-title v-html="item.arabicTitle"></v-list-tile-title>
-            </v-list-tile-content>
-            <v-list-tile-action>
-              <v-layout row wrap>
-              <v-subheader>السعر:  {{item.price}}</v-subheader>
-              <v-subheader>الكمية: {{item.quantity}}</v-subheader>
-              </v-layout>
-            </v-list-tile-action>
-
-            </v-list-tile>
-          </v-list>
-          <v-btn block :to="shoppingCart.link" color="primary" dark><v-icon>arrow_back</v-icon> <v-spacer></v-spacer> تأكيد الطلب والخروج</v-btn>
-        </v-menu>
-    </v-toolbar-items>
-    </v-toolbar>
--->
-<!-- router or contained component 
-    <v-content id="content">
-      
+    <v-content>
       <router-view></router-view>
-       
-    </v-content>
--->
+    </v-content> 
+
+<!-- footer -->
+    
+ <v-footer height="auto" >
+    <v-card
+      flat
+      tile
+      class="secondary lighten-1 white--text text-xs-center"
+    >
+      <v-card-text>
+        <v-btn
+          v-for="icon in icons"
+          :key="icon"
+          icon
+          class="mx-3 white--text"
+        >
+          <v-icon size="24px">{{ icon }}</v-icon>
+        </v-btn>
+      </v-card-text>
+      <v-card-text class="white--text pt-0">
+        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </v-card-text>
+      <v-card-text class="white--text">
+        &copy;2018 — <strong>Vuetify</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
+
 
   </v-app>
 </template>
