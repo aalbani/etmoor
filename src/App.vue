@@ -11,7 +11,12 @@
         </v-list-tile>
         <v-list-tile @click="" :to="shoppingCart.link">
           <v-list-tile-action>
-            <v-icon>{{shoppingCart.icon}}</v-icon>
+          
+          <v-badge color="red" v-model="showBadge">
+          <span slot="badge">{{badgeCounter()}}</span>
+          <v-icon right>{{shoppingCart.icon}}</v-icon>
+          </v-badge>
+          
           </v-list-tile-action>
           <v-list-tile-content>
             {{shoppingCart.title}}
@@ -33,10 +38,15 @@
       
       <v-toolbar-items id="shopingCart" class="hidden-xs-only">  
       <v-menu open-on-hover bottom offset-y>
+     
       <v-btn slot="activator" class="error white--text text-xs-center" flat :to="shoppingCart.link">
+          <v-badge color="red" v-model="showBadge">
+          <span slot="badge">{{badgeCounter()}}</span>
           <v-icon right>{{shoppingCart.icon}}</v-icon>
+          </v-badge>
           {{shoppingCart.title}}
-        </v-btn>
+      </v-btn>
+
           <v-list class="error white--text">
             <v-subheader class="white--text">الطلبات</v-subheader>
             <v-list-tile  v-for="(item, index) in basketItems" :key="index">
@@ -108,11 +118,18 @@ export default {
       {id: '3', icon: 'store', title: 'المنتجات', link: '/Shop'},
       {id: '2', icon: 'watch_later', title: 'التوصيل', link: '/Delivery'},
       {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'}
-
-      
+    ],
+  icons: 
+    [
+    'fab fa-facebook',
+    'fab fa-twitter',
+    'fab fa-google-plus',
+    'fab fa-linkedin', 
+    'fab fa-instagram'
     ],
   shoppingCart : {id: '0', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'},
-  sideNav : false
+  sideNav : false,
+  showBadge: true
   
   }),
   computed: {
@@ -123,7 +140,20 @@ export default {
 methods : {
   goHome() {
     this.$router.push('/')
-}
+},
+  badgeCounter() {
+    let count = 0
+    this.basketItems.forEach(element => {
+      count++
+    });
+    if(count > 0) {
+      this.showBadge = true
+    } else {
+       this.showBadge = false
+    }
+   
+    return count
+  }
 },
   name: 'App'
 }
@@ -140,5 +170,8 @@ methods : {
 }
 #shopingCart{
   margin-left: 10%
+}
+v-btn {
+  font-family: 'El Messiri', sans-serif;
 }
 </style>
