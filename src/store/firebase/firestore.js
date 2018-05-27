@@ -34,5 +34,17 @@ export default {
       console.log('success')
     })
     .catch(error => console.log(error))
+  },
+  sendInquiry (inquiryForm) {
+    firestore.collection('INQUIRY').add({
+      type: inquiryForm.select,
+      firstName: inquiryForm.firstName,
+      lastName: inquiryForm.lastName,
+      email: inquiryForm.email,
+      phoneNumber: inquiryForm.phoneNumber,
+      massegeText: inquiryForm.massegeText
+    })
+    .then(response => console.log('success'))
+    .catch(error => console.log(error))
   }
 }

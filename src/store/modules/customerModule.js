@@ -12,7 +12,8 @@ const state = {
     order: null
   },
   orderList: [],
-  loading: false
+  loading: false,
+  inquiryForm: null
 }
 const mutations = {
   setCustomer (state, payload) {
@@ -38,6 +39,9 @@ const mutations = {
   },
   topUpOrder (state, payload) {
     state.orderList[payload.index].quantity += payload.toAdd
+  },
+  setInquiryForm (state, payload) {
+    state.inquiryForm = payload
   }
 }
 const actions = {
@@ -48,8 +52,8 @@ const actions = {
     const oldOrder = getters.orderList
     if (oldOrder.some(oldOrder => (oldOrder.dateType === order.dateType))) {
       const payload = {
-      index: oldOrder.findIndex(oldOrder => oldOrder.dateType === order.dateType),
-      toAdd: order.quantity
+        index: oldOrder.findIndex(oldOrder => oldOrder.dateType === order.dateType),
+        toAdd: order.quantity
       }
       commit('topUpOrder', payload)
     } else {
@@ -61,6 +65,10 @@ const actions = {
   },
   setNewCustomer ({commit}, newCustomer) {
     commit('setCustomer', newCustomer)
+  },
+  sendInquiry ({commit}, inquiryForm) {
+    commit('setInquiryForm', inquiryForm)
+    firebase.sendInquiry(inquiryForm)
   }
 }
 const getters = {

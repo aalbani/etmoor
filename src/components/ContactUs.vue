@@ -61,7 +61,7 @@
         label="كيف نقدر نساعدك؟"
         textarea
         :rules="massegeRules"
-        :counter="50"
+        :counter="100"
         v-model="massegeText"
       ></v-text-field>
     </v-flex>
@@ -95,16 +95,16 @@
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ],
       massegeRules: [
-          [(v) => v.length <= 50 || 'Max 50 characters']
+        v => v.length <= 100 || 'Max 100 characters'
       ],
       nameRules: [
-          [(v) => v.length >= 2 || 'First name can\'t be less than 2 characters']
+        v => v.length >= 2 || 'First name can\'t be less than 2 characters'
       ],
       phoneRules: [
-          [(v) => v.length >= 10 || 'Phone number can\'t be less than 10 characters']
+        v => v.length >= 10 || 'Phone number can\'t be less than 10 characters'
       ],
       selectRules: [
-          [v => !!v || 'Item is required']
+        v => !!v || 'Item is required'
       ],
       select: null,
       items: [
@@ -116,15 +116,16 @@
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
-          
-          this.$store.dispatch('customer/sendInquiry', {
+          const inquiryForm = {
               select: this.select,
               firstName: this.firstName,
               lastName: this.lastName,
               phoneNumber: this.phoneNumber,
               email: this.email,
               massegeText: this.massegeText
-          })
+          }
+          console.log(inquiryForm)
+          this.$store.dispatch('customer/sendInquiry', inquiryForm)
         }
       },
       clear () {
