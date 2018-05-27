@@ -1,7 +1,7 @@
 <template>
 <!--     coursel clickable to shop item
     buttn links to shop -->
-    <v-layout row wrap>
+    <v-layout fill-height>
     
               
           <!-- loading? -->
@@ -10,6 +10,7 @@
     </v-flex>
 
           <!-- not loading -->
+          
       <v-flex xs12 v-if="!loading">
         <v-carousel style="cursor: pointer;" hide-controls>
           <v-carousel-item v-for="product in products" :key="product.id">
