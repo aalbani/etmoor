@@ -3,9 +3,9 @@
 under the box will have add to cart + count -->
 <v-container grid-list-lg >
 
-
-   <v-dialog v-model="dialog" persistent max-width="290">
-    <v-card class="info">
+<v-layout row wrap>
+  <v-dialog v-model="dialog" max-width="290">
+    <v-card>
         <v-card-title class="headline justify-center">{{addProduct.arabicTitle}}</v-card-title>
         <v-layout row wrap class="justify-center">
         <v-btn icon color="error" @click="removeQuantity"><v-icon dark>remove</v-icon></v-btn>
@@ -18,6 +18,8 @@ under the box will have add to cart + count -->
     </v-card-actions>
       </v-card>
     </v-dialog>
+</v-layout>
+   
 
     <v-snackbar
       id="snackbar"
@@ -25,29 +27,29 @@ under the box will have add to cart + count -->
       bottom
       vertical
       v-model="snackbar"
-      color="success"
+      color="primary"
     >
        تم اضافة طلبكم بنجاح
-      <v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
+      <v-btn flat color="white" @click.native="snackbar = false">Close</v-btn>
     </v-snackbar>
 
   <v-layout row wrap>
-    <v-flex xs6 sm4 lg3 v-for="(product) in products" :key="product.id" >
-      <v-card>
+    <v-flex xs12 sm4 lg3 v-for="(product) in products" :key="product.id" >
+      <v-card color="primary">
         <v-card-media
         height="200px"
         width="200px"
         >
         <img :src="product.datImage">
         </v-card-media>
-        <v-card-title primary-title class="justify-center">
+        <v-card-title primary-title class="justify-center text-xs-center">
         <div class="headline">
          <h4> {{product.arabicTitle}} </h4>
-         <h4> {{product.price}} </h4>
+         <h4> {{product.price}} ر.س </h4>
         </div>
         </v-card-title>
         <v-card-actions class="justify-center">
-          <v-btn @click="basketModal(product)" color="primary" large outline dark>اضافة الى السلة</v-btn>
+          <v-btn @click="basketModal(product)" color="white" large outline dark>اضافة الى السلة</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -129,7 +131,8 @@ under the box will have add to cart + count -->
 .headline {
   font-family: 'Tajawal', sans-serif;
   font-weight: bold ;
-  font-size: large
+  font-size: large ;
+  color: white ;
 }
 
 </style>
