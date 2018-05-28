@@ -25,14 +25,11 @@ export default {
       lastName: customer.lastName,
       phoneNumber: customer.phoneNumber,
       email: customer.email,
-      country: customer.country,
       city: customer.city,
       hood: customer.hood,
       order: customer.order
     })
-    .then(response => {
-      console.log('success')
-    })
+    .then(response => console.log(response))
     .catch(error => console.log(error))
   },
   sendInquiry (inquiryForm) {
@@ -44,7 +41,7 @@ export default {
       phoneNumber: inquiryForm.phoneNumber,
       massegeText: inquiryForm.massegeText
     })
-    .then(response => console.log('success'))
+    .then(response => response)
     .catch(error => console.log(error))
   }
 }

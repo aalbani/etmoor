@@ -14,7 +14,7 @@
               <v-layout row wrap class="justify-center text-xs-center">
                   <v-flex xs12 class="justify-center text-xs-center">
                 <h2>{{order.arabicTitle}}</h2>
-                <h2>السعر: {{order.price}} </h2>                    
+                <h2>السعر: {{order.price}} ر.س</h2>                    
                   </v-flex>
                     
                 <v-btn icon small color="error"
@@ -36,7 +36,7 @@
         
       </v-flex>
     </v-layout>
-    <h2 v-if="orderList.length > 0" class="headline black--text mt-5">المجموع الكلي : {{totalPrice()}}</h2>
+    <h2 v-if="orderList.length > 0" class="headline black--text mt-5 text-xs-center">المجموع الكلي : {{totalPrice()}} ر.س</h2>
     <v-btn v-if="orderList.length > 0" @click="completePurchase" block large nmbz color="primary" dark>اتمام الشراء</v-btn>
 </v-container>
 
