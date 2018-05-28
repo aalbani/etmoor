@@ -11,7 +11,7 @@ export default {
           'id': document.id,
           'arabicTitle': document.data().arabicTitle,
           'datImage': document.data().datImage,
-          'dateQuantity': document.data().dateQuantity,
+          'inventory': document.data().inventory,
           'dateType': document.data().dateType,
           'price': document.data().price
         }
@@ -44,5 +44,15 @@ export default {
     })
     .then(response => response)
     .catch(error => console.log(error))
+  },
+  updateInventory (updatedProducts) {
+    for (let i = 0; i < updatedProducts.length; i++) {
+      firestore.collection('PRODUCTS').doc(updatedProducts[i].id).update({
+        inventory: updatedProducts[i].inventory
+      })
+      .then(response => console.log('success'))
+      .catch(err => console.log(err))
+    }
   }
+
 }

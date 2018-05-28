@@ -29,7 +29,6 @@ const mutations = {
   },
   addOrder (state, payload) {
     state.orderList.push(payload)
-    console.log(state.orderList)
   },
   confirmedOrder (state) {
     state.customer.order = state.orderList
@@ -41,14 +40,16 @@ const mutations = {
     state.inquiryForm = payload
   },
   reset (state) {
-    state.customer.firstName = ''
-    state.customer.lastName = ''
-    state.customer.phoneNumber = ''
-    state.customer.email = ''
-    state.customer.country = ''
-    state.customer.city = ''
-    state.customer.hood = ''
-    state.customer.order = null
+    state.customer = {
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+      country: '',
+      city: '',
+      hood: '',
+      order: null
+    }
     state.orderList = []
     state.loading = false
     state.inquiryForm = null
@@ -82,9 +83,6 @@ const actions = {
   },
   reset ({commit}) {
     commit('reset')
-  },
-  updateInventory ({getters}) {
-    firebase.updateInventory(getters.order)
   }
 }
 const getters = {

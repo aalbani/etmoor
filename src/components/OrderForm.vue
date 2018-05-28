@@ -117,7 +117,7 @@
     }),
 
     methods: {
-      async submit () {
+      submit () {
         if (this.$refs.form.validate()) {
           
             const newCustomer = {
@@ -128,11 +128,11 @@
               city: this.city,
               hood: this.hood,
             }
-        await this.$store.dispatch('customer/setNewCustomer', newCustomer)
+            this.$store.dispatch('customer/setNewCustomer', newCustomer)
             this.$store.dispatch('customer/addNewCustomer')
             .then(response => {
               alert('شكرا لطلبك من إي تمور , سيتم التواصل معك قريبا')
-              this.$store.dispatch('customer/updateInventory')
+              this.$store.dispatch('products/updateInventory')
               this.$store.dispatch('customer/reset')
               this.$router.push('/')
             })

@@ -16,14 +16,16 @@
                 <h2>{{order.arabicTitle}}</h2>
                 <h2>السعر: {{order.price}} ر.س</h2>                    
                   </v-flex>
-                    
+                
+                
+                <v-btn icon small color="success"
+                @click="order.quantity++"><v-icon>keyboard_arrow_up</v-icon></v-btn>   
+                <h2>الكمية: {{order.quantity}} </h2>                
                 <v-btn icon small color="error"
                 :disabled="order.quantity <= 0"
                 @click="order.quantity--"> <v-icon>keyboard_arrow_down</v-icon></v-btn>
-                <h2>الكمية: {{order.quantity}} </h2>   
-                <v-btn icon small color="success"
-                @click="order.quantity++"><v-icon>keyboard_arrow_up</v-icon></v-btn>
-                </v-layout>
+                 </v-layout>   
+
                 
                   
 
@@ -63,17 +65,16 @@
             deleteOrder (order) {
                const index = this.orderList.indexOf(order)
                confirm('are you sure ?') && this.orderList.splice(index, 1)
-               console.log(this.orderList)
             },
             completePurchase() {
                 this.$store.dispatch('customer/confirmedOrder')
+                this.$store.dispatch('products/updateState', this.orderList)
                 this.$router.push('/Order_Form')
             },
             totalPrice () {
                 let totalPrice = 0
                 for(let i = 0 ; i < this.orderList.length ; i++) {
                     totalPrice += (Number(this.orderList[i].price) * Number(this.orderList[i].quantity))
-                    console.log(this.orderList[i].dateType)
                 }
                 return totalPrice
             }

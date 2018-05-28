@@ -8,9 +8,9 @@ under the box will have add to cart + count -->
     <v-card>
         <v-card-title class="headline justify-center">{{addProduct.arabicTitle}}</v-card-title>
         <v-layout row wrap class="justify-center">
-        <v-btn icon color="error" @click="removeQuantity"><v-icon dark>remove</v-icon></v-btn>
-        <v-subheader style="font-size: 35px" v-model="quantity">{{quantity}}</v-subheader>
         <v-btn icon color="success" @click="addQuantity"><v-icon dark>add</v-icon></v-btn>
+        <v-subheader style="font-size: 35px" v-model="quantity">{{quantity}}</v-subheader>
+        <v-btn icon color="error" @click="removeQuantity"><v-icon dark>remove</v-icon></v-btn>
         </v-layout>
         <v-card-actions class="justify-start mt-3">
           <v-btn flat @click.native="cancel">إلغاء</v-btn>
@@ -118,7 +118,6 @@ under the box will have add to cart + count -->
           price : product.price,
           quantity : quantity
         }
-        console.log(order)
         this.$store.dispatch('customer/newOrder', order)
         this.snackbar = true
         this.cancel()
