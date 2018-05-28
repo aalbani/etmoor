@@ -19,6 +19,7 @@
                 
                 
                 <v-btn icon small color="success"
+                :disabled="order.quantity >= 30"
                 @click="order.quantity++"><v-icon>keyboard_arrow_up</v-icon></v-btn>   
                 <h2>الكمية: {{order.quantity}} </h2>                
                 <v-btn icon small color="error"
