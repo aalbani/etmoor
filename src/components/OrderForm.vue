@@ -132,6 +132,8 @@
             this.$store.dispatch('customer/addNewCustomer')
             .then(response => {
               alert('شكرا لطلبك من إي تمور , سيتم التواصل معك قريبا')
+              this.$store.dispatch('customer/updateInventory')
+              this.$store.dispatch('customer/reset')
               this.$router.push('/')
             })
             .catch(err => alert('try again!') )

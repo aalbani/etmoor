@@ -21,10 +21,8 @@ const mutations = {
     state.customer.lastName = payload.lastName
     state.customer.phoneNumber = payload.phoneNumber
     state.customer.email = payload.email
-    state.customer.country = payload.country
     state.customer.city = payload.city
     state.customer.hood = payload.hood
-    console.log(state.customer)
   },
   setLoading (state, payload) {
     state.loading = payload
@@ -35,13 +33,25 @@ const mutations = {
   },
   confirmedOrder (state) {
     state.customer.order = state.orderList
-    console.log(state.customer.order)
   },
   topUpOrder (state, payload) {
     state.orderList[payload.index].quantity += payload.toAdd
   },
   setInquiryForm (state, payload) {
     state.inquiryForm = payload
+  },
+  reset (state) {
+    state.customer.firstName = ''
+    state.customer.lastName = ''
+    state.customer.phoneNumber = ''
+    state.customer.email = ''
+    state.customer.country = ''
+    state.customer.city = ''
+    state.customer.hood = ''
+    state.customer.order = null
+    state.orderList = []
+    state.loading = false
+    state.inquiryForm = null
   }
 }
 const actions = {
@@ -69,6 +79,12 @@ const actions = {
   sendInquiry ({commit}, inquiryForm) {
     commit('setInquiryForm', inquiryForm)
     firebase.sendInquiry(inquiryForm)
+  },
+  reset ({commit}) {
+    commit('reset')
+  },
+  updateInventory ({getters}) {
+    firebase.updateInventory(getters.order)
   }
 }
 const getters = {
@@ -80,6 +96,9 @@ const getters = {
   },
   orderList (state) {
     return state.orderList
+  },
+  order (state) {
+    return state.customer.order
   }
 }
 

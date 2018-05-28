@@ -1,4 +1,5 @@
 import firestore from './firebaseInit'
+import { firebase } from '@firebase/app'
 
 export default {
     // get all products and return documents

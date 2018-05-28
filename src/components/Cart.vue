@@ -73,6 +73,7 @@
                 let totalPrice = 0
                 for(let i = 0 ; i < this.orderList.length ; i++) {
                     totalPrice += (Number(this.orderList[i].price) * Number(this.orderList[i].quantity))
+                    console.log(this.orderList[i].dateType)
                 }
                 return totalPrice
             }
