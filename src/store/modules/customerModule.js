@@ -12,7 +12,8 @@ const state = {
     order: null
   },
   orderList: [],
-  loading: false
+  loading: false,
+  inquiryForm: null
 }
 const mutations = {
   setCustomer (state, payload) {
@@ -20,24 +21,38 @@ const mutations = {
     state.customer.lastName = payload.lastName
     state.customer.phoneNumber = payload.phoneNumber
     state.customer.email = payload.email
-    state.customer.country = payload.country
     state.customer.city = payload.city
     state.customer.hood = payload.hood
-    console.log(state.customer)
   },
   setLoading (state, payload) {
     state.loading = payload
   },
   addOrder (state, payload) {
     state.orderList.push(payload)
-    console.log(state.orderList)
   },
   confirmedOrder (state) {
     state.customer.order = state.orderList
-    console.log(state.customer.order)
   },
   topUpOrder (state, payload) {
     state.orderList[payload.index].quantity += payload.toAdd
+  },
+  setInquiryForm (state, payload) {
+    state.inquiryForm = payload
+  },
+  reset (state) {
+    state.customer = {
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+      country: '',
+      city: '',
+      hood: '',
+      order: null
+    }
+    state.orderList = []
+    state.loading = false
+    state.inquiryForm = null
   }
 }
 const actions = {
@@ -48,8 +63,8 @@ const actions = {
     const oldOrder = getters.orderList
     if (oldOrder.some(oldOrder => (oldOrder.dateType === order.dateType))) {
       const payload = {
-      index: oldOrder.findIndex(oldOrder => oldOrder.dateType === order.dateType),
-      toAdd: order.quantity
+        index: oldOrder.findIndex(oldOrder => oldOrder.dateType === order.dateType),
+        toAdd: order.quantity
       }
       commit('topUpOrder', payload)
     } else {
@@ -61,6 +76,13 @@ const actions = {
   },
   setNewCustomer ({commit}, newCustomer) {
     commit('setCustomer', newCustomer)
+  },
+  sendInquiry ({commit}, inquiryForm) {
+    commit('setInquiryForm', inquiryForm)
+    firebase.sendInquiry(inquiryForm)
+  },
+  reset ({commit}) {
+    commit('reset')
   }
 }
 const getters = {
@@ -72,6 +94,9 @@ const getters = {
   },
   orderList (state) {
     return state.orderList
+  },
+  order (state) {
+    return state.customer.order
   }
 }
 

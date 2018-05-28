@@ -1,9 +1,9 @@
 <template>
         
-<v-container fluid>
-    <v-layout row wrap>
-      <v-flex xs4>
-        <v-card v-for="order in orderList" :key="order.dateType">
+<v-container fluid grid-list-lg>
+    <v-layout>
+      <v-flex xs12 sm6 lg3 v-for="order in orderList" :key="order.dateType">
+        <v-card>
             <v-card-media
               contain
               height="200px"
@@ -11,18 +11,22 @@
               <img :src="order.datImage">
             </v-card-media>
             <v-card-actions>
-              <v-layout row wrap class="justify-center">
-                  <v-flex xs12 class="text-xs-center">
-                <h2>السعر: {{order.price}} </h2>                    
+              <v-layout row wrap class="justify-center text-xs-center">
+                  <v-flex xs12 class="justify-center text-xs-center">
+                <h2>{{order.arabicTitle}}</h2>
+                <h2>السعر: {{order.price}} ر.س</h2>                    
                   </v-flex>
-                    
+                
+                
+                <v-btn icon small color="success"
+                :disabled="order.quantity >= 30"
+                @click="order.quantity++"><v-icon>keyboard_arrow_up</v-icon></v-btn>   
+                <h2>الكمية: {{order.quantity}} </h2>                
                 <v-btn icon small color="error"
                 :disabled="order.quantity <= 0"
                 @click="order.quantity--"> <v-icon>keyboard_arrow_down</v-icon></v-btn>
-                <h2>الكمية: {{order.quantity}} </h2>   
-                <v-btn icon small color="success"
-                @click="order.quantity++"><v-icon>keyboard_arrow_up</v-icon></v-btn>
-                </v-layout>
+                 </v-layout>   
+
                 
                   
 
@@ -35,7 +39,8 @@
         
       </v-flex>
     </v-layout>
-    <v-btn v-if="orderList.length > 0" @click="completePurchase" large color="primary" dark>اتمام الشراء</v-btn>
+    <h2 v-if="orderList.length > 0" class="headline black--text mt-5 text-xs-center">المجموع الكلي : {{totalPrice()}} ر.س</h2>
+    <v-btn v-if="orderList.length > 0" @click="completePurchase" block large nmbz color="primary" dark>اتمام الشراء</v-btn>
 </v-container>
 
      
@@ -61,12 +66,27 @@
             deleteOrder (order) {
                const index = this.orderList.indexOf(order)
                confirm('are you sure ?') && this.orderList.splice(index, 1)
-               console.log(this.orderList)
             },
             completePurchase() {
                 this.$store.dispatch('customer/confirmedOrder')
+                this.$store.dispatch('products/updateState', this.orderList)
                 this.$router.push('/Order_Form')
+            },
+            totalPrice () {
+                let totalPrice = 0
+                for(let i = 0 ; i < this.orderList.length ; i++) {
+                    totalPrice += (Number(this.orderList[i].price) * Number(this.orderList[i].quantity))
+                }
+                return totalPrice
             }
         }
     }
 </script>
+<style>
+.headline {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: bold ;
+  font-size: large ;
+  color: white ;
+}
+</style>

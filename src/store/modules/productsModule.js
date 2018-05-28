@@ -10,6 +10,13 @@ const mutations = {
   },
   setLoading (state, payload) {
     state.loading = payload
+  },
+  updateState (state, payload) {
+    for (let i = 0; i < state.products.length; i++) {
+      if (payload.dateType === state.products[i].dateType) {
+        state.products[i].inventory = Number(state.products[i].inventory) - Number(payload.quantity)
+      }
+    }
   }
 }
 const actions = {
@@ -20,6 +27,18 @@ const actions = {
       commit('setLoading', false)
     }
     )
+  },
+  updateState ({commit}, orderList) {
+    for (let i = 0; i < orderList.length; i++) {
+      const payload = {
+        quantity: orderList[i].quantity,
+        dateType: orderList[i].dateType
+      }
+      commit('updateState', payload)
+    }
+  },
+  updateInventory ({getters}) {
+    firebase.updateInventory(getters.getProducts)
   }
 }
 const getters = {

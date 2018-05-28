@@ -1,90 +1,123 @@
 <template>
-    <v-container id="formContainer">
-      <v-layout row wrap>
-        <v-form v-model="valid" lazy-validation ref="form">
-          
-          <v-flex xs12>
-            
-          <v-text-field box 
-            v-model="firstName"
-            placeholder="الاسم"
-            required
-          ></v-text-field>
+<v-container grid-list-md>
+  
+<v-form ref="form" v-model="valid" lazy-validation>
 
-          <v-text-field box
-            v-model="lastName"
-            placeholder="اسم العائلة"
-            required
-          ></v-text-field>
+<v-layout row wrap>
 
-                    </v-flex>
+    <v-flex xs12 sm6>
+    <v-text-field
+      v-model="firstName"
+      label="الاسم الأول"
+      :rules="nameRules"
+      box
+      required
+    ></v-text-field>
+    </v-flex>
 
-          <v-text-field box
-            v-model="phoneNumber"
-            placeholder="رقم الجوال"
-            required
-          ></v-text-field>
+    <v-flex xs12 sm6>
+    <v-text-field
+      v-model="lastName"
+      label="اسم العائلة"
+      :rules="nameRules"
+      box
+      required
+    ></v-text-field>
+    </v-flex>
 
-          <v-text-field box
-            v-model="email"
-            placeholder="البريد الإلكتروني"
-            required
-            type="email"
-          ></v-text-field>
+    <v-flex xs12>
+    <v-text-field
+      v-model="email"
+      :rules="emailRules"
+      label="البريد الإلكتروني"
+      box
+      required
+    ></v-text-field>
+    </v-flex>
 
-        <v-select box
-          :items="countries"
-          v-model="country"
-          label="الدولة"
-          single-line
-        ></v-select>
+    <v-flex xs12>
+    <v-text-field
+      v-model="phoneNumber"
+      label="رقم الجوال"
+      :rules="phoneRules"
+      box
+      required
+      mask="##########"
+    ></v-text-field>
+    </v-flex>
 
-        <v-select box
-          :items="cities"
-          v-model="city"
-          label="المدينة"
-          single-line
-        ></v-select>
+  
+    <v-flex xs12>
+    <v-select
+      v-model="city"
+      :items="cities"
+      :rules="selectRules"
+      label="المدينة"
+      required
+    ></v-select>
+    </v-flex>
 
-        <v-select box
-          :items="hoods"
-          v-model="hood"
-          label="الحي"
-          single-line
-        ></v-select>
-
-        <v-btn
+    
+    <v-flex xs12>
+    <v-select
+      v-model="hood"
+      :items="hoods"
+      :rules="selectRules"
+      label="الحي"
+      required
+    ></v-select>
+    </v-flex>
+    
+    <v-flex xs12>
+    <v-btn
       :disabled="!valid"
       @click="submit"
     >
       submit
     </v-btn>
+    <v-btn @click="clear">clear</v-btn>
+    </v-flex>
 
-
-        </v-form>
-      </v-layout>
-    </v-container>
+</v-layout>
+</v-form>
+</v-container>
 </template>
 
-
 <script>
-export default {
-  data: () => ({
-    valid: false,
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    email: '',
-    country: null,
-    city: null,
-    hood: null,
-    countries: ['المملكة العربية السعودية'],
-    cities: ['الرياض'],
-    hoods: ['ظهرة البديعة','الصحافة','الياسمين']
 
-  }),
-  methods : {
-         async submit () {
+  export default {
+    data: () => ({
+      valid: true,
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      massegeText: '',      
+      email: '',
+      country: null,
+      city: null,
+      hood: null,
+      cities: ['الرياض'],
+      hoods: ['ظهرة البديعة','الصحافة','الياسمين'],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+      ],
+      massegeRules: [
+        v => v.length <= 100 || 'Max 100 characters'
+      ],
+      nameRules: [
+        v => v.length >= 2 || 'First name can\'t be less than 2 characters'
+      ],
+      phoneRules: [
+        v => v.length >= 10 || 'Phone number can\'t be less than 10 characters'
+      ],
+      selectRules: [
+        v => !!v || 'Item is required'
+      ],
+    }),
+
+    methods: {
+      submit () {
         if (this.$refs.form.validate()) {
           
             const newCustomer = {
@@ -92,30 +125,27 @@ export default {
               lastName: this.lastName,
               phoneNumber: this.phoneNumber,
               email: this.email,
-              country: this.country,
               city: this.city,
               hood: this.hood,
             }
-          await this.$store.dispatch('customer/setNewCustomer', newCustomer)
+            this.$store.dispatch('customer/setNewCustomer', newCustomer)
             this.$store.dispatch('customer/addNewCustomer')
+            .then(response => {
+              alert('شكرا لطلبك من إي تمور , سيتم التواصل معك قريبا')
+              this.$store.dispatch('products/updateInventory')
+              this.$store.dispatch('customer/reset')
+              this.$router.push('/')
+            })
+            .catch(err => alert('try again!') )
+            
           }
-        }
-}
-}
-  
-
- /*   firstName: customer.firstName,
-      lastName: customer.lastName,
-      phoneNumber: customer.phoneNumber,
-      email: customer.email,
-      country: customer.country,
-      city: customer.city,
-      hood: customer.hood,
-      order: customer.order
-*/   
+        },
+      clear () {
+        this.$refs.form.reset()
+      }
+    }
+  }
 </script>
+
 <style>
-#formContainer {
-  background-color: #D7CCC8
-}
 </style>

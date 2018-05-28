@@ -1,35 +1,54 @@
 <template>
-  <v-app>
+  <v-app id="bigContainer">
 
-    <!-- logo -->
-    <img id="logo"  class="hidden-xs-only" src="./assets/logo.png" height="100" width="100" @click="goHome">
+    <v-navigation-drawer right temporary absolute  v-model="sideNav" disable-resize-watcher>
+      <v-list>
+        <v-list-tile @click="" v-for="item in menuItems" :key="item.title" :to="item.link">
+          <v-list-tile-action >
+            <v-icon>{{item.icon}}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>{{item.title}}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="" :to="shoppingCart.link">
+          <v-list-tile-action>
+          
+          <v-badge color="red" v-model="showBadge">
+          <span slot="badge">{{badgeCounter()}}</span>
+          <v-icon right>{{shoppingCart.icon}}</v-icon>
+          </v-badge>
+          
+          </v-list-tile-action>
+          <v-list-tile-content>
+            {{shoppingCart.title}}
+          </v-list-tile-content>
+        </v-list-tile>
+        </v-list>
+    </v-navigation-drawer>
 
-    <!-- BUTTONS ABOVE PAGE-->
-    <v-container id="contain" fluid class="hidden-xs-only" >
-      <v-layout row wrap justify-end style="margin-right: 100px;">
-          <v-btn id="btn" v-for="item in menuItems" :key="item.id" :to="item.link" round class="primary white--text mt-5">
-          {{item.title}}
+    <v-toolbar absolute app dark color="error" height="100">
+      <v-toolbar-side-icon @click="sideNav = !sideNav" class="hidden-md-and-up"></v-toolbar-side-icon>
+      <v-toolbar-title class="justify-right"><router-link id="toolbarTitle" to="/" tag="span">إي - تمور</router-link></v-toolbar-title>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat v-for="item in menuItems" :key="item.title" :to="item.link">
           <v-icon right>{{item.icon}}</v-icon>
+          {{item.title}}
         </v-btn>
-      </v-layout>
-    </v-container>
-    
-<!-- toolbar-->
- <v-toolbar id="toolbar" color="primary" class="hidden-xs-only" absolute height="40px">
-    <v-spacer></v-spacer>
-    <v-toolbar-items >
-        <v-menu
-          transition="slide-y-transition"
-          bottom
-          allow-overflow
-          full-width
-        >
-          <v-btn slot="activator" class="primary white--text" flat >
-           {{ shoppingCart.title }}
-           <v-icon>{{shoppingCart.icon}}</v-icon>
-          </v-btn>
-          <v-list>
-            <v-subheader>الطلبات</v-subheader>
+      </v-toolbar-items>
+      <v-spacer></v-spacer>
+      
+      <v-toolbar-items id="shopingCart" class="hidden-xs-only">  
+      <v-menu open-on-hover bottom offset-y>
+     
+      <v-btn slot="activator" class="error white--text text-xs-center" flat :to="shoppingCart.link">
+          <v-badge color="red" v-model="showBadge">
+          <span slot="badge">{{badgeCounter()}}</span>
+          <v-icon right>{{shoppingCart.icon}}</v-icon>
+          </v-badge>
+          {{shoppingCart.title}}
+      </v-btn>
+
+          <v-list class="error white--text">
+            <v-subheader class="white--text">الطلبات</v-subheader>
             <v-list-tile  v-for="(item, index) in basketItems" :key="index">
             <v-list-tile-avatar>
               <img :src="item.datImage">
@@ -39,27 +58,53 @@
             </v-list-tile-content>
             <v-list-tile-action>
               <v-layout row wrap>
-              <v-subheader>السعر:  {{item.price}}</v-subheader>
-              <v-subheader>الكمية: {{item.quantity}}</v-subheader>
+              <v-subheader class="white--text">السعر:  {{item.price}}</v-subheader>
+              <v-subheader class="white--text">الكمية: {{item.quantity}}</v-subheader>
               </v-layout>
             </v-list-tile-action>
-
             </v-list-tile>
           </v-list>
-          <v-btn block :to="shoppingCart.link" color="primary" dark><v-icon>arrow_back</v-icon> <v-spacer></v-spacer> تأكيد الطلب والخروج</v-btn>
-        </v-menu>
-    </v-toolbar-items>
-    </v-toolbar>
+          
+    </v-menu>
+      </v-toolbar-items>
 
-    
+    </v-toolbar>
+  
+  
 
 <!-- router or contained component -->
-    <v-content id="content">
-      
+
+    <v-content>
       <router-view></router-view>
-       
-    </v-content>
-      
+    </v-content> 
+
+<!-- footer -->
+    
+ <v-footer height="auto" >
+    <v-card
+      flat
+      tile
+      class="secondary lighten-1 white--text text-xs-center"
+    >
+      <v-card-text>
+        <v-btn
+          v-for="icon in icons"
+          :key="icon"
+          icon
+          class="mx-3 white--text"
+        >
+          <v-icon size="24px">{{ icon }}</v-icon>
+        </v-btn>
+      </v-card-text>
+      <v-card-text class="white--text pt-0">
+        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </v-card-text>
+      <v-card-text class="white--text">
+        &copy;2018 — <strong>Vuetify</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
+
 
   </v-app>
 </template>
@@ -69,12 +114,22 @@ export default {
   data: () => ({
   menuItems: 
     [
-      {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'},
-      {id: '2', icon: 'watch_later', title: 'التوصيل', link: '/Delivery'},
+      {id: '4', icon: 'home', title: 'الرئيسية', link: '/'},
       {id: '3', icon: 'store', title: 'المنتجات', link: '/Shop'},
-      {id: '4', icon: 'home', title: 'الرئيسية', link: '/'}
+      {id: '2', icon: 'watch_later', title: 'التوصيل', link: '/Delivery'},
+      {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'}
     ],
-  shoppingCart : {id: '3', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'}
+  icons: 
+    [
+    'fab fa-facebook',
+    'fab fa-twitter',
+    'fab fa-google-plus',
+    'fab fa-linkedin', 
+    'fab fa-instagram'
+    ],
+  shoppingCart : {id: '0', icon: 'shopping_cart', title: 'سلة المشتريات', link: '/Cart'},
+  sideNav : false,
+  showBadge: true
   
   }),
   computed: {
@@ -85,27 +140,38 @@ export default {
 methods : {
   goHome() {
     this.$router.push('/')
-}
+},
+  badgeCounter() {
+    let count = 0
+    this.basketItems.forEach(element => {
+      count++
+    });
+    if(count > 0) {
+      this.showBadge = true
+    } else {
+       this.showBadge = false
+    }
+   
+    return count
+  }
 },
   name: 'App'
 }
 </script>
 <style>
-#logo {
-  position: absolute;
-  right: 60px;
-  top: 30px;
+#bigContainer {
+  background-color: #F3D3B8;
+  direction: rtl
+}
+#toolbarTitle {
   cursor: pointer;
+  font-family: 'Rakkas', cursive;
+  font-size: 40px
 }
-#btn {
-  top: 30px;
-  right: 50px
-
+#shopingCart{
+  margin-left: 10%
 }
-#toolbar {
-  top: 140px;
-}
-#content {
-  margin-top: 100px
+v-btn {
+  font-family: 'El Messiri', sans-serif;
 }
 </style>

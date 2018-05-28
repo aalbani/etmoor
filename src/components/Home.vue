@@ -1,9 +1,7 @@
 <template>
 <!--     coursel clickable to shop item
     buttn links to shop -->
-  <v-app>
-  <v-container fluid>
-    <v-layout row wrap>
+    <v-layout fill-height>
     
               
           <!-- loading? -->
@@ -12,19 +10,15 @@
     </v-flex>
 
           <!-- not loading -->
+          
       <v-flex xs12 v-if="!loading">
-        <v-carousel style="cursor: pointer;">
+        <v-carousel style="cursor: pointer;" hide-controls>
           <v-carousel-item v-for="product in products" :key="product.id">
           <img class="img" :src="product.datImage">
           </v-carousel-item>
       </v-carousel>
-      <v-flex class="text-md-center">
-      <v-btn block  large  color="primary" class="mt-3" dark @click="buttClick">تسوق الآن</v-btn>
-      </v-flex>
       </v-flex>
     </v-layout>
-  </v-container>
-  </v-app>
 </template>
 
 <script>
