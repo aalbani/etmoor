@@ -66,14 +66,16 @@
       ></v-text-field>
     </v-flex>
     
-    <v-flex xs12>
+    <v-flex xs12 text-xs-center>
     <v-btn
+      color="primary"
+      large
       :disabled="!valid"
       @click="submit"
     >
-      submit
+      إرسال
     </v-btn>
-    <v-btn @click="clear">clear</v-btn>
+    <v-btn color="primary" large @click="clear">مسح</v-btn>
     </v-flex>
 
 </v-layout>
