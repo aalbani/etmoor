@@ -35,7 +35,7 @@
     ></v-text-field>
     </v-flex>
 
-    <v-flex xs12>
+    <v-flex xs12 sm6>
     <v-text-field
       v-model="email"
       :rules="emailRules"
@@ -45,7 +45,7 @@
     ></v-text-field>
     </v-flex>
 
-    <v-flex xs12>
+    <v-flex xs12 sm6>
     <v-text-field
       v-model="phoneNumber"
       label="رقم الجوال"

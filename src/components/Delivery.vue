@@ -17,7 +17,7 @@
 
 <style>
 #texts {
-  font-family: 'Tajawal', sans-serif;
+  font-family:'El Messiri', sans-serif;
   font-weight: bold ;
   font-size: large ;
   color: white ;

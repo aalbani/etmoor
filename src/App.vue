@@ -172,7 +172,20 @@ methods : {
 #shopingCart{
   margin-left: 10%
 }
-v-btn {
-  font-family: 'El Messiri', sans-serif;
+.btn__content {
+    font-family: 'El Messiri', 'sans-serif';
+    font-size: 13px;
+}
+.input-group--text-field-box:not(.input-group--textarea):not(.input-group--multi-line) label {
+    top: 32px;
+    text-align: right !important;
+}
+.input-group--text-field.input-group--textarea:not(.input-group--full-width) label {
+    right: 15px;
+    text-align: right;
+}
+.input-group.input-group--append-icon label, .input-group.input-group--prepend-icon label, .input-group.input-group--selection-controls label {
+    max-width: 100%;
+    text-align: right;
 }
 </style>

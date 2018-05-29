@@ -1,8 +1,8 @@
 <template>
         
-<v-container fluid grid-list-lg>
-    <v-layout>
-      <v-flex xs12 sm6 lg3 v-for="order in orderList" :key="order.dateType">
+<v-container fluid grid-list-md>
+    <v-layout v-for="order in orderList" :key="order.dateType">
+      <v-flex xs12 sm6 md4 lg3>
         <v-card>
             <v-card-media
               contain
@@ -13,15 +13,15 @@
             <v-card-actions>
               <v-layout row wrap class="justify-center text-xs-center">
                   <v-flex xs12 class="justify-center text-xs-center">
-                <h2>{{order.arabicTitle}}</h2>
-                <h2>السعر: {{order.price}} ر.س</h2>                    
+                <h2 class="headline">{{order.arabicTitle}}</h2>
+                <h2 class="headline">السعر: {{order.price}} ر.س</h2>                    
                   </v-flex>
                 
                 
                 <v-btn icon small color="success"
                 :disabled="order.quantity >= 30"
                 @click="order.quantity++"><v-icon>keyboard_arrow_up</v-icon></v-btn>   
-                <h2>الكمية: {{order.quantity}} </h2>                
+                <h2 class="headline">الكمية: {{order.quantity}} </h2>                
                 <v-btn icon small color="error"
                 :disabled="order.quantity <= 0"
                 @click="order.quantity--"> <v-icon>keyboard_arrow_down</v-icon></v-btn>
@@ -84,9 +84,9 @@
 </script>
 <style>
 .headline {
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'El Messiri', 'sans-serif';
   font-weight: bold ;
   font-size: large ;
-  color: white ;
+  color: black ;
 }
 </style>

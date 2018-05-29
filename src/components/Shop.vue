@@ -129,7 +129,7 @@ under the box will have add to cart + count -->
 
 <style scoped>
 .headline {
-  font-family: 'Tajawal', sans-serif;
+  font-family:'El Messiri', sans-serif;
   font-weight: bold ;
   font-size: large ;
   color: white ;
