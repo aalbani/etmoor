@@ -1,20 +1,21 @@
 <template>
   <v-app id="bigContainer">
 
-    <v-navigation-drawer right temporary absolute  v-model="sideNav" disable-resize-watcher>
+    <v-navigation-drawer temporary fixed 
+    v-model="sideNav" disable-resize-watcher disable-route-watcher right>
       <v-list>
-        <v-list-tile @click="" v-for="item in menuItems" :key="item.title" :to="item.link">
-          <v-list-tile-action >
+        <v-list-tile @click="sideNav = !sideNav" v-for="item in menuItems" :key="item.title" :to="item.link">
+          <v-list-tile-action>
             <v-icon>{{item.icon}}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>{{item.title}}</v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="" :to="shoppingCart.link">
+        <v-list-tile @click="sideNav = !sideNav" :to="shoppingCart.link">
           <v-list-tile-action>
           
           <v-badge color="red" v-model="showBadge">
           <span slot="badge">{{badgeCounter()}}</span>
-          <v-icon right>{{shoppingCart.icon}}</v-icon>
+          <v-icon>{{shoppingCart.icon}}</v-icon>
           </v-badge>
           
           </v-list-tile-action>
