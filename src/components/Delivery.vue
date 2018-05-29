@@ -2,7 +2,7 @@
     <v-container class="mt-5">
       <v-layout row wrap justify-center>
           
-        <v-card color="primary">
+        <v-card color="secondary">
           <v-card-title primary-title>
             <div>
               <h3 class="headline" id="texts">التوصيل</h3>

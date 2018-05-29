@@ -26,7 +26,7 @@
         </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar absolute app dark color="error" height="100">
+    <v-toolbar absolute app dark color="primary" height="100">
       <v-toolbar-side-icon @click="sideNav = !sideNav" class="hidden-md-and-up"></v-toolbar-side-icon>
       <v-toolbar-title class="justify-right"><router-link id="toolbarTitle" to="/" tag="span">إي - تمور</router-link></v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">
@@ -40,7 +40,7 @@
       <v-toolbar-items id="shopingCart" class="hidden-xs-only">  
       <v-menu open-on-hover bottom offset-y>
      
-      <v-btn slot="activator" class="error white--text text-xs-center" flat :to="shoppingCart.link">
+      <v-btn slot="activator" class="primary white--text text-xs-center" flat :to="shoppingCart.link">
           <v-badge color="red" v-model="showBadge">
           <span slot="badge">{{badgeCounter()}}</span>
           <v-icon right>{{shoppingCart.icon}}</v-icon>
@@ -48,7 +48,7 @@
           {{shoppingCart.title}}
       </v-btn>
 
-          <v-list class="error white--text">
+          <v-list class="primary white--text">
             <v-subheader class="white--text">الطلبات</v-subheader>
             <v-list-tile  v-for="(item, index) in basketItems" :key="index">
             <v-list-tile-avatar>
@@ -85,7 +85,7 @@
     <v-card
       flat
       tile
-      class="secondary lighten-1 white--text text-xs-center"
+      class="info lighten-1 white--text text-xs-center"
     >
       <v-card-text>
         <v-btn

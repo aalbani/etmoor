@@ -35,7 +35,7 @@ under the box will have add to cart + count -->
 
   <v-layout row wrap>
     <v-flex xs12 sm4 lg3 v-for="(product) in products" :key="product.id" >
-      <v-card color="primary">
+      <v-card color="secondary">
         <v-card-media
         height="200px"
         width="200px"
