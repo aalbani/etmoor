@@ -85,7 +85,7 @@
     <v-card
       flat
       tile
-      class="info lighten-1 white--text text-xs-center"
+      class="primary white--text text-xs-center"
     >
       <v-card-text>
         <v-btn
@@ -161,7 +161,7 @@ methods : {
 </script>
 <style>
 #bigContainer {
-  background-color: #F3D3B8;
+  background-color: #E2E8E8;
   direction: rtl
 }
 #toolbarTitle {

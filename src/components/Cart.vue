@@ -3,7 +3,7 @@
 <v-container fluid grid-list-md>
     <v-layout v-for="order in orderList" :key="order.dateType">
       <v-flex xs12 sm6 md4 lg3>
-        <v-card>
+        <v-card color="primary">
             <v-card-media
               contain
               height="200px"
@@ -39,6 +39,19 @@
         
       </v-flex>
     </v-layout>
+
+    <v-layout row wrap justify-center>
+          
+        <v-card color="primary" class="mt-5 mb-5">
+          <v-card-title primary-title>
+            <div>
+              <br>
+              <p class="headline"> سلة المشتريات فارغة </p>
+            </div>
+          </v-card-title>
+        </v-card>
+      </v-layout>
+
     <h2 v-if="orderList.length > 0" class="headline black--text mt-5 text-xs-center">المجموع الكلي : {{totalPrice()}} ر.س</h2>
     <v-btn v-if="orderList.length > 0" @click="completePurchase" block large nmbz color="primary" dark>اتمام الشراء</v-btn>
 </v-container>
@@ -65,7 +78,7 @@
         methods: {
             deleteOrder (order) {
                const index = this.orderList.indexOf(order)
-               confirm('are you sure ?') && this.orderList.splice(index, 1)
+               confirm('هل أنت متأكد من حذف المنتج؟') && this.orderList.splice(index, 1)
             },
             completePurchase() {
                 this.$store.dispatch('customer/confirmedOrder')
@@ -87,6 +100,6 @@
   font-family: 'El Messiri', 'sans-serif';
   font-weight: bold ;
   font-size: large ;
-  color: black ;
+  color: white ;
 }
 </style>
