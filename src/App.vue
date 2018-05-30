@@ -69,6 +69,17 @@
     </v-menu>
       </v-toolbar-items>
 
+  
+    <v-toolbar-items id="shopingCart" class="hidden-md-and up">
+      <v-btn class="primary white--text text-xs-center" flat :to="shoppingCart.link">
+          <v-badge color="red" v-model="showBadge">
+          <span slot="badge">{{badgeCounter()}}</span>
+          <v-icon right>{{shoppingCart.icon}}</v-icon>
+          </v-badge>
+      </v-btn>
+
+      </v-toolbar-items>
+
     </v-toolbar>
   
   

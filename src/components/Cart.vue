@@ -40,7 +40,7 @@
       </v-flex>
     </v-layout>
 
-    <v-layout row wrap justify-center>
+    <v-layout row wrap justify-center v-if="orderList.length <= 0">
           
         <v-card color="primary" class="mt-5 mb-5">
           <v-card-title primary-title>
