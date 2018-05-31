@@ -37,8 +37,8 @@
       </v-toolbar-items>
       <v-spacer></v-spacer>
       
-      <v-toolbar-items id="shopingCart" class="hidden-xs-only">  
-      <v-menu open-on-hover bottom offset-y>
+      <v-toolbar-items id="shopingCart" class="hidden-sm-and-down">  
+      <v-menu open-on-hover bottom offset-y>  
      
       <v-btn slot="activator" class="primary white--text text-xs-center" flat :to="shoppingCart.link">
           <v-badge color="red" v-model="showBadge">
@@ -70,7 +70,7 @@
       </v-toolbar-items>
 
   
-    <v-toolbar-items id="shopingCart" class="hidden-md-and up">
+    <v-toolbar-items id="shopingCart" class="hidden-md-and-up">
       <v-btn class="primary white--text text-xs-center" flat :to="shoppingCart.link">
           <v-badge color="red" v-model="showBadge">
           <span slot="badge">{{badgeCounter()}}</span>
@@ -199,4 +199,5 @@ methods : {
     max-width: 100%;
     text-align: right;
 }
+
 </style>
