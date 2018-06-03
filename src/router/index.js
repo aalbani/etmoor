@@ -6,11 +6,11 @@ import OrderForm from '@/components/OrderForm'
 import Shop from '@/components/Shop'
 import ContactUs from '@/components/ContactUs'
 import Delivery from '@/components/Delivery'
-import Deliveries from '@/component/Dashboard/Deliveries'
-import ProvidorHome from '@/component/Dashboard/ProvidorHome'
-import Login from '@/component/Dashboard/Login'
-import Tasks from '@/component/Dashboard/Tasks'
-import Dashboard from '@/component/Dashboard/Dashboard'
+import Deliveries from '@/components/Dashboard/Deliveries'
+import ProvidorHome from '@/components/Dashboard/ProvidorHome'
+import Login from '@/components/Dashboard/Login'
+import Tasks from '@/components/Dashboard/Tasks'
+import Dashboard from '@/components/Dashboard/Dashboard'
 
 Vue.use(Router)
 
