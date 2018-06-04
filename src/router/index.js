@@ -6,8 +6,8 @@ import OrderForm from '@/components/Customers/OrderForm'
 import Shop from '@/components/Customers/Shop'
 import ContactUs from '@/components/Customers/ContactUs'
 import Delivery from '@/components/Customers/Delivery'
-import Signup from '@components/Customers/Signup'
-import Login from '@components/Customers/Login'
+import Signup from '@/components/Customers/Signup'
+import Login from '@/components/Customers/Login'
 
 Vue.use(Router)
 

@@ -212,5 +212,8 @@ methods : {
     max-width: 100%;
     text-align: right;
 }
+.input-group--text-field-box label {
+    left: auto;
+}
 
 </style>
