@@ -1,7 +1,7 @@
 <template>
         
 <v-container fluid grid-list-md>
-    <v-layout v-for="order in orderList" :key="order.dateType">
+    <v-layout v-for="order in orderList" :key="order.dateType" class="justify-center">
       <v-flex xs12 sm6 md4 lg3>
         <v-card color="primary">
             <v-card-media
@@ -19,11 +19,11 @@
                 
                 
                 <v-btn icon small color="success"
-                :disabled="order.quantity >= 30"
+                :disabled="order.quantity >= order.inventory"
                 @click="order.quantity++"><v-icon>keyboard_arrow_up</v-icon></v-btn>   
                 <h2 class="headline">الكمية: {{order.quantity}} </h2>                
                 <v-btn icon small color="error"
-                :disabled="order.quantity <= 0"
+                :disabled="order.quantity <= 1"
                 @click="order.quantity--"> <v-icon>keyboard_arrow_down</v-icon></v-btn>
                  </v-layout>   
 
@@ -82,7 +82,6 @@
             },
             completePurchase() {
                 this.$store.dispatch('customer/confirmedOrder')
-                this.$store.dispatch('products/updateState', this.orderList)
                 this.$router.push('/Order_Form')
             },
             totalPrice () {

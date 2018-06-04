@@ -28,14 +28,13 @@ const actions = {
     }
     )
   },
-  updateState ({commit}, orderList) {
-    for (let i = 0; i < orderList.length; i++) {
+  updateState ({commit}, order) {
       const payload = {
-        quantity: orderList[i].quantity,
-        dateType: orderList[i].dateType
+        quantity: order.quantity,
+        dateType: order.dateType
       }
       commit('updateState', payload)
-    }
+    
   },
   updateInventory ({getters}) {
     firebase.updateInventory(getters.getProducts)

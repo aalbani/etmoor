@@ -5,8 +5,8 @@
     
               
           <!-- loading? -->
-    <v-flex xs12 v-if="loading" class="text-xs-center justify-center">
-    <v-progress-circular :size="70" :width="7" indeterminate color="green"></v-progress-circular>
+    <v-flex xs12 v-if="loading" class="text-xs-center justify-center mt-5">
+    <v-progress-circular :size="70" :width="7" indeterminate color="primary"></v-progress-circular>
     </v-flex>
 
           <!-- not loading -->

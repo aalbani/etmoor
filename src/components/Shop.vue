@@ -6,15 +6,15 @@ under the box will have add to cart + count -->
 <v-layout row wrap>
   <v-dialog v-model="dialog" max-width="290">
     <v-card>
-        <v-card-title class="headline justify-center">{{addProduct.arabicTitle}}</v-card-title>
+        <v-card-title class="headline justify-center grey--text">{{addProduct.arabicTitle}}</v-card-title>
         <v-layout row wrap class="justify-center">
-        <v-btn icon color="success" @click="addQuantity"><v-icon dark>add</v-icon></v-btn>
+        <v-btn icon color="success" @click="addQuantity" :disabled="quantity >= addProduct.inventory"><v-icon dark>add</v-icon></v-btn>
         <v-subheader style="font-size: 35px" v-model="quantity">{{quantity}}</v-subheader>
         <v-btn icon color="error" @click="removeQuantity"><v-icon dark>remove</v-icon></v-btn>
         </v-layout>
-        <v-card-actions class="justify-start mt-3">
+        <v-card-actions class="justify-center mt-3">
+          <v-btn flat  @click.native="addToBasket(addProduct, quantity)">اضف الى السلة</v-btn>
           <v-btn flat @click.native="cancel">إلغاء</v-btn>
-          <v-btn :disabled="quantity < 1" flat  @click.native="addToBasket(addProduct, quantity)">اضف الى السلة</v-btn>
     </v-card-actions>
       </v-card>
     </v-dialog>
@@ -49,7 +49,8 @@ under the box will have add to cart + count -->
         </div>
         </v-card-title>
         <v-card-actions class="justify-center">
-          <v-btn @click="basketModal(product)" color="white" large outline dark>اضافة الى السلة</v-btn>
+          <v-btn v-if="product.inventory" @click="basketModal(product)" color="white" large outline dark>اضافة الى السلة</v-btn>
+          <v-btn v-if="!product.inventory" :disabled="true" color="white" large outline dark>غير متوفر في المخزن</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -117,8 +118,10 @@ under the box will have add to cart + count -->
           arabicTitle : product.arabicTitle,
           datImage : product.datImage,
           price : product.price,
-          quantity : quantity
+          quantity : quantity,
+          inventory: product.inventory
         }
+        this.$store.dispatch('products/updateState', order)
         this.$store.dispatch('customer/newOrder', order)
         this.snackbar = true
         this.cancel()
