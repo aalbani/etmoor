@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/Customers/components/Home'
-import Cart from '@/Customers/components/Cart'
-import OrderForm from '@/Customers/components/OrderForm'
-import Shop from '@/Customers/components/Shop'
-import ContactUs from '@/Customers/components/ContactUs'
-import Delivery from '@/Customers/components/Delivery'
+import Home from '@/components/Customers/Home'
+import Cart from '@/components/Customers/Cart'
+import OrderForm from '@/components/Customers/OrderForm'
+import Shop from '@/components/Customers/Shop'
+import ContactUs from '@/components/Customers/ContactUs'
+import Delivery from '@/components/Customers/Delivery'
+import Signup from '@components/Customers/Signup'
+import Login from '@components/Customers/Login'
 
 Vue.use(Router)
 
@@ -40,6 +42,15 @@ export default new Router({
       path: '/Contact_Us',
       name: 'Contact_Us',
       component: ContactUs
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: Signup
+    }, {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ],
   mode: 'history'
