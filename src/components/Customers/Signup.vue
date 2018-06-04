@@ -1,10 +1,20 @@
 <template>
 <v-container grid-list-md>
   
-<v-form ref="form" v-model="valid" lazy-validation>
+<v-form ref="form" v-model="valid">
 
 <v-layout row wrap>
 
+
+    <v-flex xs12>
+    <v-text-field
+      v-model="email"
+      label='الإيميل'
+      :rules="emailRules"
+      box
+      required
+    ></v-text-field>
+    </v-flex>
 
     <v-flex xs12>
     <v-text-field
@@ -125,6 +135,10 @@
       ],
       selectRules: [
         v => !!v || 'Item is required'
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ],
       passwordRules: [
         v => v.length >= 8 || 'password can\'t be less than 8 characters'
