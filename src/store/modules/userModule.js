@@ -1,4 +1,4 @@
-// import firebase from '../firebase/firestore'
+import firebase from '../firebase/firestore'
 
 const state = {
   user: {
@@ -9,7 +9,9 @@ const state = {
     city: '',
     region: '',
     hood: '',
-    authLevel: ''
+    authLevel: '',
+    isAuth: '',
+    orders: null
   }
 }
 const mutations = {
@@ -18,9 +20,11 @@ const mutations = {
   }
 }
 const actions = {
-  Signup ({commit}, userInfo) {
-    commit('setUser', userInfo)
-    // some firebase auth
+  signupNewUser ({commit}, userInfo) {
+    firebase.signupNewUser(userInfo)
+  },
+  login ({commit}, loginInfo) {
+    firebase.login(loginInfo)
   }
 }
 const getters = {

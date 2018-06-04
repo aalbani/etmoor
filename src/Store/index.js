@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import productsModule from './modules/productsModule'
 import customerModule from './modules/customerModule'
+import userModule from './modules/userModule'
 
 Vue.use(Vuex)
 export const store = new Vuex.Store({
@@ -9,7 +10,8 @@ export const store = new Vuex.Store({
   state: {},
   modules: {
     products: productsModule,
-    customer: customerModule
+    customer: customerModule,
+    user: userModule
   },
   mutations: {},
   actions: {},

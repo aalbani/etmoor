@@ -1,7 +1,7 @@
 <template>
 <v-container grid-list-md>
   
-<v-form ref="form" v-model="valid">
+<v-form ref="form" v-model="valid" lazy-validation>
 
 <v-layout row wrap>
 
@@ -54,6 +54,7 @@
           :type="showPass ? 'password' : 'text'"
           label="ادخل الرمز السري"
           :rules="passwordRules"
+          v-model="password"
           box
           required
         ></v-text-field>
@@ -72,8 +73,8 @@
     
     <v-flex xs12>
     <v-select
-      v-model="hood"
-      :items="Regions"
+      v-model="region"
+      :items="regions"
       :rules="selectRules"
       label="المنطقة"
       required
@@ -82,7 +83,7 @@
 
     <v-flex xs12 >
     <v-text-field
-      v-model="region"
+      v-model="hood"
       label="الحي"
       :rules="nameRules"
       box
@@ -116,17 +117,14 @@
       firstName: '',
       lastName: '',
       phoneNumber: '',
-      massegeText: '',
       password: '',
+      email: '',
       showPass: true,
       hood: null,
       city: null,
       region: null,
       cities: ['الرياض'],
-      Regions: ['وسط الرياض', 'جنوب الرياض', 'غرب الرياض','شرق الرياض','شمال الرياض'],
-      massegeRules: [
-        v => v.length <= 100 || 'Max 100 characters'
-      ],
+      regions: ['وسط الرياض', 'جنوب الرياض', 'غرب الرياض','شرق الرياض','شمال الرياض'],
       nameRules: [
         v => v.length >= 2 || 'this field can\'t be less than 2 characters'
       ],
@@ -149,24 +147,18 @@
       submit () {
         if (this.$refs.form.validate()) {
           
-            const newCustomer = {
+            const newUser = {
               firstName: this.firstName,
               lastName: this.lastName,
               phoneNumber: this.phoneNumber,
               email: this.email,
               city: this.city,
               hood: this.hood,
+              password: this.password
             }
-            this.$store.dispatch('customer/setNewCustomer', newCustomer)
-            this.$store.dispatch('customer/addNewCustomer')
-            .then(response => {
-              alert('شكرا لطلبك من إي تمور , سيتم التواصل معك قريبا')
-              this.$store.dispatch('products/updateInventory')
-              this.$store.dispatch('customer/reset')
-              this.$router.push('/')
-            })
-            .catch(err => alert('try again!') )
-            
+            console.log(newUser)
+            this.$store.dispatch('user/signupNewUser', newUser)
+
           }
         },
       clear () {

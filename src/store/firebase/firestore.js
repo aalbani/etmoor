@@ -1,5 +1,5 @@
 import firestore from './firebaseInit'
-// import { firebase } from '@firebase/app'
+import { firebase } from '@firebase/app'
 
 export default {
     // get all products and return documents
@@ -53,6 +53,23 @@ export default {
       .then(response => console.log('success'))
       .catch(err => console.log(err))
     }
+  },
+  signupNewUser (userInfo) {
+    firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
+    .then(response => alert('تم تسجيل حساب جديد بنجاح'))
+    .catch(err => {
+      alert('حصل خطأ')
+      console.log(err)
+    })
+  },
+  login (loginInfo) {
+    firebase.auth().signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
+    .then(response => alert('تم تسجيل الدخول بنجاح'))
+    .catch(err => {
+      alert('حصل خطأ')
+      console.log(err)
+    })
+
   }
 
 }

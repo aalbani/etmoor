@@ -8,6 +8,8 @@ import ContactUs from '@/components/Customers/ContactUs'
 import Delivery from '@/components/Customers/Delivery'
 import Signup from '@/components/Customers/Signup'
 import Login from '@/components/Customers/Login'
+import NotLoggedIn from '@/components/Customers/NotLoggedin'
+import Account from '@/components/Customers/Account'
 
 Vue.use(Router)
 
@@ -44,13 +46,25 @@ export default new Router({
       component: ContactUs
     },
     {
+      path: '/account',
+      name: 'account',
+      component: Account
+    },
+
+    {
       path: '/signup',
       name: 'signup',
       component: Signup
-    }, {
+    },
+    {
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/login-or-signup',
+      name: 'notLoggedIn',
+      component: NotLoggedIn
     }
   ],
   mode: 'history'

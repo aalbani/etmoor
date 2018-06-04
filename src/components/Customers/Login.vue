@@ -25,6 +25,7 @@
                         :type="showPass ? 'password' : 'text'"
                         label="ادخل الرمز السري"
                         :rules="passwordRules"
+                        v-model="password"
                         box
                         required
                     ></v-text-field>
@@ -68,24 +69,11 @@ export default {
       submit () {
         if (this.$refs.form.validate()) {
           
-            const newCustomer = {
-              firstName: this.firstName,
-              lastName: this.lastName,
-              phoneNumber: this.phoneNumber,
+            const loginInfo = {
               email: this.email,
-              city: this.city,
-              hood: this.hood,
+              password: this.password
             }
-            this.$store.dispatch('customer/setNewCustomer', newCustomer)
-            this.$store.dispatch('customer/addNewCustomer')
-            .then(response => {
-              alert('شكرا لطلبك من إي تمور , سيتم التواصل معك قريبا')
-              this.$store.dispatch('products/updateInventory')
-              this.$store.dispatch('customer/reset')
-              this.$router.push('/')
-            })
-            .catch(err => alert('try again!') )
-            
+            this.$store.dispatch('user/login', loginInfo)
           }
         }
      }
