@@ -5,6 +5,18 @@
 
 <v-layout row wrap>
 
+
+    <v-flex xs12>
+    <v-text-field
+      v-model="phoneNumber"
+      label="رقم الجوال"
+      :rules="phoneRules"
+      box
+      required
+      mask="##########"
+    ></v-text-field>
+    </v-flex>
+
     <v-flex xs12 sm6>
     <v-text-field
       v-model="firstName"
@@ -26,39 +38,17 @@
     </v-flex>
 
     <v-flex xs12>
-    <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      label="البريد الإلكتروني"
-      box
-      required
-    ></v-text-field>
-    </v-flex>
-
-    <v-flex xs12>
         <v-text-field
           :append-icon="showPass ? 'visibility' : 'visibility_off'"
           :append-icon-cb="() => (showPass = !showPass)"
           :type="showPass ? 'password' : 'text'"
-          name="input-10-2"
           label="ادخل الرمز السري"
-          min="8"
+          :rules="passwordRules"
           box
+          required
         ></v-text-field>
       </v-flex>
-
-    <v-flex xs12>
-    <v-text-field
-      v-model="phoneNumber"
-      label="رقم الجوال"
-      :rules="phoneRules"
-      box
-      required
-      mask="##########"
-    ></v-text-field>
-    </v-flex>
-
-  
+ 
     <v-flex xs12>
     <v-select
       v-model="city"
@@ -79,6 +69,16 @@
       required
     ></v-select>
     </v-flex>
+
+    <v-flex xs12 >
+    <v-text-field
+      v-model="region"
+      label="الحي"
+      :rules="nameRules"
+      box
+      required
+    ></v-text-field>
+    </v-flex>
     
     <v-flex xs12 text-xs-center>
     <v-btn
@@ -87,7 +87,7 @@
       :disabled="!valid"
       @click="submit"
     >
-      إرسال
+      تسجيل
     </v-btn>
     <v-btn color="primary" large @click="clear">مسح</v-btn>
     </v-flex>
@@ -106,24 +106,19 @@
       firstName: '',
       lastName: '',
       phoneNumber: '',
-      massegeText: '',      
-      email: '',
+      massegeText: '',
       password: '',
-      repeatPassword: '',
-      country: null,
-      city: null,
+      showPass: true,
       hood: null,
+      city: null,
+      region: null,
       cities: ['الرياض'],
-      Regions: ['جنوب الرياض', 'غرب الرياض','شرق الرياض','شمال الرياض'],
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-      ],
+      Regions: ['وسط الرياض', 'جنوب الرياض', 'غرب الرياض','شرق الرياض','شمال الرياض'],
       massegeRules: [
         v => v.length <= 100 || 'Max 100 characters'
       ],
       nameRules: [
-        v => v.length >= 2 || 'First name can\'t be less than 2 characters'
+        v => v.length >= 2 || 'this field can\'t be less than 2 characters'
       ],
       phoneRules: [
         v => v.length >= 10 || 'Phone number can\'t be less than 10 characters'
@@ -133,10 +128,7 @@
       ],
       passwordRules: [
         v => v.length >= 8 || 'password can\'t be less than 8 characters'
-      ],
-      repeatPasswordRules: [
-        v => v !== this.password || 'passwords don\'t match'
-      ],
+      ]
     }),
 
     methods: {
