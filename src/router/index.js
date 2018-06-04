@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import Cart from '@/components/Cart'
-import OrderForm from '@/components/OrderForm'
-import Shop from '@/components/Shop'
-import ContactUs from '@/components/ContactUs'
-import Delivery from '@/components/Delivery'
+import Home from '@/Customers/components/Home'
+import Cart from '@/Customers/components/Cart'
+import OrderForm from '@/Customers/components/OrderForm'
+import Shop from '@/Customers/components/Shop'
+import ContactUs from '@/Customers/components/ContactUs'
+import Delivery from '@/Customers/components/Delivery'
 
 Vue.use(Router)
 

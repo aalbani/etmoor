@@ -1,6 +1,7 @@
 <template>
   <v-app id="bigContainer">
 
+  <!-- NavDrawer -->
     <v-navigation-drawer temporary fixed 
     v-model="sideNav" disable-resize-watcher disable-route-watcher right>
       <v-list>
@@ -26,6 +27,9 @@
         </v-list>
     </v-navigation-drawer>
 
+
+
+  <!-- Toolbar -->
     <v-toolbar absolute app dark color="primary" height="100">
       <v-toolbar-side-icon @click="sideNav = !sideNav" class="hidden-md-and-up"></v-toolbar-side-icon>
       <v-toolbar-title class="justify-right"><router-link id="toolbarTitle" to="/" tag="span">إي - تمور</router-link></v-toolbar-title>
@@ -81,7 +85,8 @@
       </v-toolbar-items>
 
     </v-toolbar>
-  
+
+<!-- toolbar End -->
   
 
 <!-- router or contained component -->
@@ -120,6 +125,9 @@
 
   </v-app>
 </template>
+
+
+
 
 <script>
 export default {
@@ -170,6 +178,11 @@ methods : {
   name: 'App'
 }
 </script>
+
+
+
+
+
 <style>
 #bigContainer {
   background-color: #E2E8E8;

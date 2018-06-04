@@ -101,7 +101,6 @@ under the box will have add to cart + count -->
         this.dialog = true
       },
       addQuantity() {
-        if (this.quantity <= 30)
         this.quantity += 1
       },
       removeQuantity() {
