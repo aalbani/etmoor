@@ -1,17 +1,8 @@
 import firebase from '../firebase/firestore'
 
+// LEVEL 0 : CUSTOMER, LEVEL 1 :  PROVIDOR, LEVEL 2 : ADMIN.
 const state = {
   user: {
-    phoneNumber: '',
-    firstName: '',
-    lastName: '',
-    password: '',
-    city: '',
-    region: '',
-    hood: '',
-    authLevel: '',
-    isAuth: '',
-    orders: null
   }
 }
 const mutations = {
@@ -24,7 +15,9 @@ const actions = {
     firebase.signupNewUser(userInfo)
   },
   login ({commit}, loginInfo) {
-    firebase.login(loginInfo)
+    firebase.login(loginInfo, userInfo => {
+      commit('setUser', userInfo)
+    })
   }
 }
 const getters = {

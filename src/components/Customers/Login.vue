@@ -11,7 +11,7 @@
                 <v-card-actions>
                       <v-text-field
                         v-model="email"
-                        label='الإيميل'
+                        label='البريد الإلكتروني'
                         :rules="emailRules"
                         box
                         required
@@ -23,7 +23,7 @@
                         :append-icon="showPass ? 'visibility' : 'visibility_off'"
                         :append-icon-cb="() => (showPass = !showPass)"
                         :type="showPass ? 'password' : 'text'"
-                        label="ادخل الرمز السري"
+                        label="الرمز السري"
                         :rules="passwordRules"
                         v-model="password"
                         box

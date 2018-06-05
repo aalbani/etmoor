@@ -56,20 +56,35 @@ export default {
   },
   signupNewUser (userInfo) {
     firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
-    .then(response => alert('تم تسجيل حساب جديد بنجاح'))
+    .then(response => {
+      alert('تم تسجيل حساب جديد بنجاح')
+      console.log(userInfo)
+      firestore.collection('USER').doc(userInfo.email).set({
+        authLevel: 0,
+        orders: [],
+        location: {}
+      })
+    })
     .catch(err => {
       alert('حصل خطأ')
       console.log(err)
     })
   },
-  login (loginInfo) {
+  login (loginInfo, cb) {
     firebase.auth().signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
-    .then(response => alert('تم تسجيل الدخول بنجاح'))
+    .then(response => {
+      firestore.collection('USER').doc(loginInfo.email).get()
+      .then(r => {
+        const userDetails = r.data()
+        console.log(userDetails)
+        alert('تم تسجيل الدخول بنجاح')
+        cb(userDetails)
+      })
+    })
     .catch(err => {
       alert('حصل خطأ')
       console.log(err)
     })
-
   }
 
 }
