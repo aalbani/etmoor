@@ -29,12 +29,11 @@ const actions = {
     )
   },
   updateState ({commit}, order) {
-      const payload = {
-        quantity: order.quantity,
-        dateType: order.dateType
-      }
-      commit('updateState', payload)
-    
+    const payload = {
+      quantity: order.quantity,
+      dateType: order.dateType
+    }
+    commit('updateState', payload)
   },
   updateInventory ({getters}) {
     firebase.updateInventory(getters.getProducts)
