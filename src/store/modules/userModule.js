@@ -3,11 +3,15 @@ import firebase from '../firebase/firestore'
 // LEVEL 0 : CUSTOMER, LEVEL 1 :  PROVIDOR, LEVEL 2 : ADMIN.
 const state = {
   user: {
-  }
+  },
+  loading: false
 }
 const mutations = {
   setUser (state, payload) {
     state.user = payload
+  },
+  setLoading (state, payload) {
+    state.loading = payload
   }
 }
 const actions = {
@@ -15,8 +19,10 @@ const actions = {
     firebase.signupNewUser(userInfo)
   },
   login ({commit}, loginInfo) {
+    commit('setLoading', true)
     firebase.login(loginInfo, userInfo => {
       commit('setUser', userInfo)
+      commit('setLoading', false)
     })
   }
 }
