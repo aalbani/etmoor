@@ -41,7 +41,6 @@
       :rules="emailRules"
       label="البريد الإلكتروني"
       box
-      required
     ></v-text-field>
     </v-flex>
 
