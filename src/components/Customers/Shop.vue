@@ -13,7 +13,7 @@ under the box will have add to cart + count -->
         <v-btn icon color="error" @click="removeQuantity"><v-icon dark>remove</v-icon></v-btn>
         </v-layout>
         <v-card-actions class="justify-center mt-3">
-          <v-btn flat  @click.native="addToBasket(addProduct, quantity)">اضف الى السلة</v-btn>
+          <v-btn flat :disabled="quantity <= 0" @click.native="addToBasket(addProduct, quantity)">اضف الى السلة</v-btn>
           <v-btn flat @click.native="cancel">إلغاء</v-btn>
     </v-card-actions>
       </v-card>

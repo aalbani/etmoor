@@ -85,6 +85,9 @@ export default {
       alert('حصل خطأ')
       console.log(err)
     })
+  },
+  signout () {
+    firebase.auth().signOut()
   }
 
 }

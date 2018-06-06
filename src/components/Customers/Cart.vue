@@ -73,7 +73,7 @@
             },
             orderList() {
                 return this.$store.getters['customer/orderList']
-            }
+            },
         },
         methods: {
             deleteOrder (order) {
