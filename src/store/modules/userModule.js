@@ -2,8 +2,7 @@ import firebase from '../firebase/firestore'
 
 // LEVEL 0 : CUSTOMER, LEVEL 1 :  PROVIDOR, LEVEL 2 : ADMIN.
 const state = {
-  user: {
-  },
+  user: null,
   loading: false
 }
 const mutations = {
@@ -28,7 +27,10 @@ const actions = {
 }
 const getters = {
   getUser (state) {
-    return state.User
+    return state.user
+  },
+  isAuth (state) {
+    return (state.user !== null && state.user !== undefined)
   }
 }
 

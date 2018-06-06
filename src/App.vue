@@ -132,14 +132,6 @@
 <script>
 export default {
   data: () => ({
-  menuItems: 
-    [
-      {id: '4', icon: 'home', title: 'الرئيسية', link: '/'},
-      {id: '3', icon: 'store', title: 'المنتجات', link: '/Shop'},
-      {id: '2', icon: 'watch_later', title: 'التوصيل', link: '/Delivery'},
-      {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'},
-      {id: '0', icon: 'account_circle', title: 'حسابي', link: '/account'}
-    ],
   icons: 
     [
     'fab fa-facebook',
@@ -156,7 +148,29 @@ export default {
   computed: {
     basketItems () {
      return this.$store.getters['customer/orderList']
-  }     
+  },
+    menuItems () {
+      let menuItems = [
+        {id: '4', icon: 'home', title: 'الرئيسية', link: '/'},
+        {id: '3', icon: 'store', title: 'المنتجات', link: '/Shop'},
+        {id: '2', icon: 'watch_later', title: 'التوصيل', link: '/Delivery'},
+        {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'},
+        {icon: 'lock_open', title: 'التسجيل', link: '/login-or-signup'}        
+      ]
+      if (this.userIsAuth) {
+      menuItems = [
+        {id: '4', icon: 'home', title: 'الرئيسية', link: '/'},
+        {id: '3', icon: 'store', title: 'المنتجات', link: '/Shop'},
+        {id: '2', icon: 'watch_later', title: 'التوصيل', link: '/Delivery'},
+        {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'},
+        {id: '0', icon: 'account_circle', title: 'حسابي', link: '/account'}
+      ]
+      }
+      return menuItems
+    },
+    userIsAuth () {
+      return this.$store.getters['user/isAuth']
+    }
 },
 methods : {
   goHome() {
