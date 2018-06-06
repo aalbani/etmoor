@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import AuthGuard from './AuthGuard'
 import Home from '@/components/Customers/Home'
 import Cart from '@/components/Customers/Cart'
 import OrderForm from '@/components/Customers/OrderForm'
@@ -16,6 +17,11 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '*',
+      name: 'Home',
+      component: Home
+    },
+    {
       path: '/',
       name: 'Home',
       component: Home
@@ -28,7 +34,8 @@ export default new Router({
     {
       path: '/Order_Form',
       name: 'Order_Form',
-      component: OrderForm
+      component: OrderForm,
+      beforeEnter: AuthGuard
     },
     {
       path: '/Shop',
@@ -48,7 +55,8 @@ export default new Router({
     {
       path: '/account',
       name: 'account',
-      component: Account
+      component: Account,
+      beforeEnter: AuthGuard
     },
 
     {
