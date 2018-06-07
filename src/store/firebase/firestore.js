@@ -54,16 +54,16 @@ export default {
       .catch(err => console.log(err))
     }
   },
-  signupNewUser (userInfo) {
+  signupNewUser (userInfo, cb) {
     firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
     .then(response => {
-      alert('تم تسجيل حساب جديد بنجاح')
-      console.log(userInfo)
-      firestore.collection('USER').doc(userInfo.email).set({
+      firestore.collection('USER').doc(response.uid).set({
         authLevel: 0,
         orders: [],
         location: {}
       })
+      cb = 'SUCCESS'
+      return cb
     })
     .catch(err => {
       alert('حصل خطأ')

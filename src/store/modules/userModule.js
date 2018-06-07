@@ -14,9 +14,8 @@ const mutations = {
   }
 }
 const actions = {
-  signupNewUser ({commit, dispatch}, userInfo) {
+  signupNewUser ({commit}, userInfo) {
     firebase.signupNewUser(userInfo)
-    dispatch('login', userInfo)
   },
   login ({commit}, loginInfo) {
     commit('setLoading', true)
@@ -28,6 +27,9 @@ const actions = {
   signout ({commit}) {
     firebase.signOut()
     commit('setUser', null)
+  },
+  autoSignIn ({commit}, payload) {
+    commit('setUser', {id: payload.uid, userInfo: {}})
   }
 }
 const getters = {

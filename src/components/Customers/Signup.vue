@@ -80,9 +80,6 @@
             this.$store.dispatch('user/signupNewUser', newUser)
           }
         },
-      clear () {
-        this.$refs.form.reset()
-      }
     }
   }
 </script>

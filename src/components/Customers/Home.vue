@@ -40,11 +40,6 @@ created () {
   if (!this.products){
   this.$store.dispatch('products/initProducts')  
   }
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      this.$store.dispatch('autoSignIn', user)
-    }
-  })
 }
 }
 </script>
