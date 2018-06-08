@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
-import firebase from 'firebase'
+// import firebase from 'firebase'
 import 'vuetify/dist/vuetify.min.css'
 
 import { store } from './store'
@@ -25,12 +25,12 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App),
-  created () {
+  render: h => h(App)
+  /* created () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.dispatch('autoSignIn', user)
       }
     })
-  }
+  } */
 })

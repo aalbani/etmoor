@@ -38,6 +38,7 @@
                         large
                         :disabled="!valid"
                         @click="submit"
+                        :loading="loading"
                         >
                             تسجيل الدخول
                     </v-btn>
@@ -64,7 +65,21 @@ export default {
         v => v.length >= 8 || 'password can\'t be less than 8 characters'
       ]
     }),
-
+    computed: {
+      isAuth() {
+        return this.$store.getters['user/isAuth']
+      },
+      loading() {
+        return this.$store.getters['user/loading']
+      }
+    },
+    watch : {
+       isAuth (value) {
+        if (value === true) {
+          this.$router.replace('/')
+        }
+      }
+    },
      methods: {
       submit () {
         if (this.$refs.form.validate()) {

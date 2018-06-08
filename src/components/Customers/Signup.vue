@@ -40,6 +40,7 @@
                         large
                         :disabled="!valid"
                         @click="submit"
+                        :loading="loading"
                         >
                             تسجيل 
                     </v-btn>
@@ -67,7 +68,21 @@
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ],
     }),
-
+    computed: {
+      isAuth() {
+        return this.$store.getters['user/isAuth']
+      }
+    },
+    watch : {
+       isAuth (value) {
+        if (value === true) {
+          this.$router.replace('/')
+        }
+      },
+      loading() {
+        return this.$store.getters['user/loading']
+      }
+    },
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
@@ -76,7 +91,6 @@
               email: this.email,
               password: this.password
             }
-            console.log(newUser)
             this.$store.dispatch('user/signupNewUser', newUser)
           }
         },

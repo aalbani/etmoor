@@ -15,11 +15,15 @@ const mutations = {
 }
 const actions = {
   signupNewUser ({commit}, userInfo) {
-    firebase.signupNewUser(userInfo)
+    commit('setLoading', true)
+    firebase.signupNewUser(userInfo, newUser => {
+      commit('setLoading', false)
+      commit('setUser', newUser)
+    })
   },
   login ({commit}, loginInfo) {
     commit('setLoading', true)
-    firebase.login(loginInfo, userInfo => {
+    return firebase.login(loginInfo, userInfo => {
       commit('setUser', userInfo)
       commit('setLoading', false)
     })
@@ -38,6 +42,9 @@ const getters = {
   },
   isAuth (state) {
     return (state.user !== null && state.user !== undefined)
+  },
+  loading (state) {
+    return state.loading
   }
 }
 

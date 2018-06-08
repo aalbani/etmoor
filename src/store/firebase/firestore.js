@@ -54,16 +54,16 @@ export default {
       .catch(err => console.log(err))
     }
   },
-  signupNewUser (userInfo, cb) {
+  signupNewUser (userInfo, callback) {
     firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
-    .then(response => {
-      firestore.collection('USER').doc(response.uid).set({
-        authLevel: 0,
+    .then(user => {
+      const newUser = {
+        id: user.uid,
         orders: [],
-        location: {}
-      })
-      cb = 'SUCCESS'
-      return cb
+        location: {},
+        authLevel: 0
+      }
+      callback(newUser)
     })
     .catch(err => {
       alert('حصل خطأ')
@@ -72,15 +72,13 @@ export default {
   },
   login (loginInfo, cb) {
     firebase.auth().signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
-    .then(response => {
-      firestore.collection('USER').doc(loginInfo.email).get()
       .then(r => {
-        const userDetails = r.data()
+        const userDetails = r
+        console.log(r)
         console.log(userDetails)
         alert('تم تسجيل الدخول بنجاح')
         cb(userDetails)
       })
-    })
     .catch(err => {
       alert('حصل خطأ')
       console.log(err)
