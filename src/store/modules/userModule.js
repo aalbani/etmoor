@@ -45,6 +45,9 @@ const getters = {
   },
   loading (state) {
     return state.loading
+  },
+  authLevel (state) {
+    return state.user.authLevel
   }
 }
 

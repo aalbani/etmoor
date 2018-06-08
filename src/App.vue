@@ -157,13 +157,26 @@ export default {
         {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'},
         {id: '00', icon: 'lock_open', title: 'التسجيل', link: '/login-or-signup'}        
       ]
-      if (this.userIsAuth) {
-      menuItems.splice(4,1,{id: '0', icon: 'account_circle', title: 'حسابي', link: '/account'})
+      if (this.userIsAuth && this.authLevel === 0) {
+      menuItems.splice(4,1,{id: '5', icon: 'account_circle', title: 'حسابي', link: '/account'})
+      }
+      if (this.userIsAuth && this.authLevel === 1) {
+      menuItems = [
+        {id: '5', icon: 'home', title: 'History', link: '/'},
+        {id: '04', icon: 'home', title: 'Complaints', link: '/'},
+        {id: '03', icon: 'store', title: 'Inventory', link: '/Shop'},
+        {id: '02', icon: 'watch_later', title: 'Tasks', link: '/Delivery'},
+        {id: '01', icon: 'message', title: 'Delivery', link: '/Contact_Us'},
+        {id: '00', icon: 'lock_open', title: 'Dashboard', link: '/login-or-signup'}        
+      ]
       }
       return menuItems
     },
     userIsAuth () {
       return this.$store.getters['user/isAuth']
+    },
+    authLevel () {
+      return this.$store.getters['user/authLevel']
     }
 },
 methods : {

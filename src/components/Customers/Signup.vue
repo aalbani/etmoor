@@ -71,6 +71,9 @@
     computed: {
       isAuth() {
         return this.$store.getters['user/isAuth']
+      },
+      loading() {
+        return this.$store.getters['user/loading']
       }
     },
     watch : {
@@ -78,9 +81,6 @@
         if (value === true) {
           this.$router.replace('/')
         }
-      },
-      loading() {
-        return this.$store.getters['user/loading']
       }
     },
     methods: {

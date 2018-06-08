@@ -63,6 +63,11 @@ export default {
         location: {},
         authLevel: 0
       }
+      firestore.collection('USER').doc(user.uid).set({
+        orders: [],
+        location: {},
+        authLevel: 0
+      })
       callback(newUser)
     })
     .catch(err => {
@@ -74,8 +79,6 @@ export default {
     firebase.auth().signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
       .then(r => {
         const userDetails = r
-        console.log(r)
-        console.log(userDetails)
         alert('تم تسجيل الدخول بنجاح')
         cb(userDetails)
       })
