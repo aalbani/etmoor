@@ -11,6 +11,13 @@ import Signup from '@/components/Customers/Signup'
 import Login from '@/components/Customers/Login'
 import NotLoggedIn from '@/components/Customers/NotLoggedin'
 import Account from '@/components/Customers/Account'
+import Dashboard from '@/components/Admins/Dashboard'
+import Complaints from '@/components/Admins/Complaints'
+import Deliveries from '@/components/Admins/Deliveries'
+import Tasks from '@/components/Admins/Tasks'
+import HistoryRecord from '@/components/Admins/HistoryRecord'
+import Inventory from '@/components/Admins/Inventory'
+import AdminsAuthGuard from './AdminsAuthGuard'
 
 Vue.use(Router)
 
@@ -73,6 +80,42 @@ export default new Router({
       path: '/login-or-signup',
       name: 'notLoggedIn',
       component: NotLoggedIn
+    },
+    {
+      path: '/admins/dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
+      beforeEnter: AdminsAuthGuard
+    },
+    {
+      path: '/admins/omplaints',
+      name: 'Complaints',
+      component: Complaints,
+      beforeEnter: AdminsAuthGuard
+    },
+    {
+      path: '/admins/delivery',
+      name: 'Deliveries',
+      component: Deliveries,
+      beforeEnter: AdminsAuthGuard
+    },
+    {
+      path: '/admins/tasks',
+      name: 'Tasks',
+      component: Tasks,
+      beforeEnter: AdminsAuthGuard
+    },
+    {
+      path: '/admins/historyRecord',
+      name: 'HistoryRecord',
+      component: HistoryRecord,
+      beforeEnter: AdminsAuthGuard
+    },
+    {
+      path: '/admins/inventory',
+      name: 'Inventory',
+      component: Inventory,
+      beforeEnter: AdminsAuthGuard
     }
   ],
   mode: 'history'
