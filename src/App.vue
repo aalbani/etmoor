@@ -11,7 +11,7 @@
           </v-list-tile-action>
           <v-list-tile-content>{{item.title}}</v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="sideNav = !sideNav" :to="shoppingCart.link">
+        <v-list-tile v-if="showCart" @click="sideNav = !sideNav" :to="shoppingCart.link">
           <v-list-tile-action>
           
           <v-badge color="red" v-model="showBadge">
@@ -41,7 +41,7 @@
       </v-toolbar-items>
       <v-spacer></v-spacer>
       
-      <v-toolbar-items id="shopingCart" class="hidden-sm-and-down">  
+      <v-toolbar-items v-if="showCart" id="shopingCart" class="hidden-sm-and-down">  
       <v-menu open-on-hover bottom offset-y>  
      
       <v-btn slot="activator" class="primary white--text text-xs-center" flat :to="shoppingCart.link">
@@ -157,10 +157,10 @@ export default {
         {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'},
         {id: '00', icon: 'lock_open', title: 'التسجيل', link: '/login-or-signup'}        
       ]
-      if (this.userIsAuth && authLevel === 0) {
+      if (this.userIsAuth && this.authLevel === 0) {
       menuItems.splice(4,1,{id: '5', icon: 'account_circle', title: 'حسابي', link: '/account'})
       }
-      if (this.userIsAuth && authLevel === 1) {
+      if (this.userIsAuth && this.authLevel === 1) {
       menuItems = [
         {id: '5', icon: 'home', title: 'History', link: '/'},
         {id: '04', icon: 'home', title: 'Complaints', link: '/'},
@@ -177,6 +177,10 @@ export default {
     },
     authLevel () {
       return this.$store.getters['user/authLevel']
+    },
+    showCart () {
+      if (!this.userIsAuth || this.authLevel === 0)
+      return true
     }
 },
 methods : {

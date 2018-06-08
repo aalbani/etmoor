@@ -15,6 +15,9 @@ const mutations = {
   },
   setError (state, payload) {
     state.error = payload
+  },
+  clearError (state, payload) {
+    state.error = payload
   }
 }
 const actions = {
@@ -46,6 +49,9 @@ const actions = {
   },
   autoSignIn ({commit}, payload) {
     commit('setUser', {id: payload.uid, userInfo: {}})
+  },
+  clearError ({commit}) {
+    commit('clearError', null)
   }
 }
 const getters = {
@@ -60,6 +66,9 @@ const getters = {
   },
   authLevel (state) {
     return state.user.authLevel
+  },
+  error (state) {
+    return state.error
   }
 }
 

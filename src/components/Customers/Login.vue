@@ -45,6 +45,14 @@
                 </v-card-actions>
               </v-card>
             </v-flex>
+            
+            <!-- error alert -->
+    <v-layout wrap row v-if="error" class="mt-3" >
+      <v-flex>
+        <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+      </v-flex>
+    </v-layout>
+
         </v-layout>
         </v-form>
     </v-container>
@@ -71,7 +79,10 @@ export default {
       },
       loading() {
         return this.$store.getters['user/loading']
-      }
+      },
+      error () {
+        return this.$store.getters['user/error']
+      },
     },
     watch : {
        isAuth (value) {
@@ -90,7 +101,10 @@ export default {
             }
             this.$store.dispatch('user/login', loginInfo)
           }
-        }
+        },
+      onDismissed () {
+        this.$store.dispatch('user/clearError')
+      }
      }
 }
 </script>

@@ -4,7 +4,7 @@ import router from './router'
 import Vuetify from 'vuetify'
 // import firebase from 'firebase'
 import 'vuetify/dist/vuetify.min.css'
-
+import AlertComponent from './components/Shared/Alert.vue'
 import { store } from './store'
 
 Vue.use(Vuetify, {
@@ -17,7 +17,7 @@ Vue.use(Vuetify, {
     success: '#4CAF50',
     warning: '#FFC107'
   }})
-
+Vue.component('app-alert', AlertComponent)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
