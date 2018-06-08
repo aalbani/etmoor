@@ -55,7 +55,7 @@ export default {
     }
   },
   signupNewUser (userInfo, callback) {
-    firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
+    return firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
     .then(user => {
       const newUser = {
         id: user.uid,
@@ -70,22 +70,16 @@ export default {
       })
       callback(newUser)
     })
-    .catch(err => {
-      alert('حصل خطأ')
-      console.log(err)
-    })
   },
   login (loginInfo, cb) {
-    firebase.auth().signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
-      .then(r => {
-        const userDetails = r
-        alert('تم تسجيل الدخول بنجاح')
-        cb(userDetails)
+    return firebase.auth().signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
+      .then(user => {
+        firestore.collection('USER').doc(user.uid).get()
+        .then(data => {
+          const user = data.data()
+          cb(user)
+        })
       })
-    .catch(err => {
-      alert('حصل خطأ')
-      console.log(err)
-    })
   },
   signout () {
     firebase.auth().signOut()

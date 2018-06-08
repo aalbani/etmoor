@@ -157,10 +157,10 @@ export default {
         {id: '1', icon: 'message', title: 'اتصل بنا', link: '/Contact_Us'},
         {id: '00', icon: 'lock_open', title: 'التسجيل', link: '/login-or-signup'}        
       ]
-      if (this.userIsAuth && this.authLevel === 0) {
+      if (this.userIsAuth && authLevel === 0) {
       menuItems.splice(4,1,{id: '5', icon: 'account_circle', title: 'حسابي', link: '/account'})
       }
-      if (this.userIsAuth && this.authLevel === 1) {
+      if (this.userIsAuth && authLevel === 1) {
       menuItems = [
         {id: '5', icon: 'home', title: 'History', link: '/'},
         {id: '04', icon: 'home', title: 'Complaints', link: '/'},
