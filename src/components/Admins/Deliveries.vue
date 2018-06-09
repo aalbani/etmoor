@@ -1,5 +1,5 @@
 <template>
-   <v-container>
+   <v-container class="admins">
   <v-data-table
     v-model="selected"
     :headers="headers"

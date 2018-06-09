@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-md>
+  <v-container fluid grid-list-md class="admins">
     <v-layout row wrap>
       <v-flex d-flex xs12 sm6>
         <v-card color="deep-orange darken-1" dark>

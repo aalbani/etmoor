@@ -88,13 +88,13 @@ export default new Router({
       beforeEnter: AdminsAuthGuard
     },
     {
-      path: '/admins/omplaints',
+      path: '/admins/complaints',
       name: 'Complaints',
       component: Complaints,
       beforeEnter: AdminsAuthGuard
     },
     {
-      path: '/admins/delivery',
+      path: '/admins/deliveries',
       name: 'Deliveries',
       component: Deliveries,
       beforeEnter: AdminsAuthGuard

@@ -1,3 +1,5 @@
 <template>
-    <h1>go to firebase, show cards of all products and can increase or decrease inventory</h1>
+<v-container class="admins">
+    <h1>Show all finnished deliveries: need : checked for delivery task and checked for dilvered already!</h1>
+</v-container>
 </template>

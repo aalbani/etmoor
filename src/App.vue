@@ -162,12 +162,14 @@ export default {
       }
       if (this.userIsAuth && this.authLevel === 1) {
       menuItems = [
-        {id: '5', icon: 'home', title: 'History', link: '/'},
-        {id: '04', icon: 'home', title: 'Complaints', link: '/'},
-        {id: '03', icon: 'store', title: 'Inventory', link: '/Shop'},
-        {id: '02', icon: 'watch_later', title: 'Tasks', link: '/Delivery'},
-        {id: '01', icon: 'message', title: 'Delivery', link: '/Contact_Us'},
-        {id: '00', icon: 'lock_open', title: 'Dashboard', link: '/login-or-signup'}        
+        {id: '00', icon: 'dashboard', title: 'Dashboard', link: '/admins/dashboard'},
+        {id: '01', icon: 'watch_later', title: 'Tasks', link: '/admins/tasks'},        
+        {id: '02', icon: 'local_shipping', title: 'Delivery', link: '/admins/deliveries'},
+        {id: '03', icon: 'person', title: 'Complaints', link: '/admins/complaints'},
+        {id: '04', icon: 'storage', title: 'Inventory', link: '/admins/inventory'},
+        {id: '05', icon: 'schedule', title: 'History', link: '/admins/historyRecord'},
+
+                
       ]
       }
       return menuItems
@@ -241,5 +243,7 @@ methods : {
 .input-group--text-field-box label {
     left: auto;
 }
-
+.admins {
+  direction: ltr
+}
 </style>

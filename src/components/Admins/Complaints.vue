@@ -1,4 +1,5 @@
 <template>
+ <v-container class="admins">
   <v-expansion-panel>
     <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
       <div slot="header">
@@ -12,4 +13,7 @@
       </v-card>
     </v-expansion-panel-content>
   </v-expansion-panel>
+  </v-container>
 </template>
+<style scoped>
+
