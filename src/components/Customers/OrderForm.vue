@@ -27,16 +27,6 @@
 
     <v-flex xs12>
     <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      label="البريد الإلكتروني"
-      box
-      required
-    ></v-text-field>
-    </v-flex>
-
-    <v-flex xs12>
-    <v-text-field
       v-model="phoneNumber"
       label="رقم الجوال"
       :rules="phoneRules"
@@ -45,7 +35,6 @@
       mask="##########"
     ></v-text-field>
     </v-flex>
-
   
     <v-flex xs12>
     <v-select
@@ -60,12 +49,22 @@
     
     <v-flex xs12>
     <v-select
-      v-model="hood"
-      :items="hoods"
+      v-model="region"
+      :items="regions"
       :rules="selectRules"
       label="المنطقة"
       required
     ></v-select>
+    </v-flex>
+
+    <v-flex xs12>
+    <v-text-field
+      v-model="hood"
+      label="الحي"
+      :rules="nameRules"
+      box
+      required
+    ></v-text-field>
     </v-flex>
     
     <v-flex xs12 text-xs-center>
@@ -96,20 +95,18 @@
       phoneNumber: '',
       massegeText: '',      
       email: '',
-      country: null,
+      hood: '',
+      region: '',
       city: null,
       hood: null,
       cities: ['الرياض'],
-      hoods: ['ظهرة البديعة','الصحافة','الياسمين'],
+      regions: ['شمال الرياض','شرق الرياض','غرب الرياض','جنوب الرياض','وسط الرياض'],
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
       ],
-      massegeRules: [
-        v => v.length <= 100 || 'Max 100 characters'
-      ],
       nameRules: [
-        v => v.length >= 2 || 'First name can\'t be less than 2 characters'
+        v => v.length >= 2 || 'name can\'t be less than 2 characters'
       ],
       phoneRules: [
         v => v.length >= 10 || 'Phone number can\'t be less than 10 characters'
@@ -118,28 +115,35 @@
         v => !!v || 'Item is required'
       ],
     }),
-
+    computed : {
+      user () {
+        return this.$store.getters['user/getUser']
+      },
+      order () {
+        return this.$store.getters['customer/order']
+      }
+    },
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
           
-            const newCustomer = {
+            const newOrderForm = {
               firstName: this.firstName,
               lastName: this.lastName,
               phoneNumber: this.phoneNumber,
-              email: this.email,
-              city: this.city,
+              region: this.city,
               hood: this.hood,
+              order: this.order
             }
-            this.$store.dispatch('customer/setNewCustomer', newCustomer)
-            this.$store.dispatch('customer/addNewCustomer')
+            console.log(newOrderForm)
+            this.$store.dispatch('order/addNewOrder', newOrderForm)
             .then(response => {
               alert('شكرا لطلبك من إي تمور , سيتم التواصل معك قريبا')
+              this.$store.dispatch('user/addLocationAndOrder', newOrderForm)
               this.$store.dispatch('products/updateInventory')
-              this.$store.dispatch('customer/reset')
               this.$router.push('/')
             })
-            .catch(err => alert('try again!') )
+            .catch(err => alert('الرجاء المحاولة مرة أخرى') )
             
           }
         },

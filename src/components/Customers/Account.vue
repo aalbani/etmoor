@@ -16,7 +16,7 @@
 export default {
   methods: {
     signout() {
-      this.$store.getters['user/signout']
+      this.$store.dispatch('user/signout')
     }
   }
 }

@@ -58,10 +58,13 @@ export default {
     return firebase.auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
     .then(user => {
       const newUser = {
+        email: userInfo.email,
         id: user.uid,
-        orders: [],
-        location: {},
-        authLevel: 0
+        user: {
+          orders: [],
+          location: {},
+          authLevel: 0
+        }
       }
       firestore.collection('USER').doc(user.uid).set({
         orders: [],
@@ -76,13 +79,36 @@ export default {
       .then(user => {
         firestore.collection('USER').doc(user.uid).get()
         .then(data => {
-          const user = data.data()
-          cb(user)
+          const loginUser = {
+            user: data.data(),
+            email: loginInfo.email,
+            uid: data.uid
+          }
+          cb(loginUser)
         })
       })
   },
   signout () {
     firebase.auth().signOut()
+  },
+  addNewOrder (orderForm) {
+    return firestore.collection('ORDER').add({
+      order: orderForm,
+      tasked: false,
+      deliverd: false
+    })
+  },
+  updateUser (uid, form) {
+    return firebase.collection('USER').doc(uid).update({
+      orders: this.orders.push(form.order),
+      location: {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        phoneNumber: form.phoneNumber,
+        country: form.country,
+        region: form.city,
+        hood: form.hood
+      }
+    })
   }
-
 }

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import productsModule from './modules/productsModule'
 import customerModule from './modules/customerModule'
 import userModule from './modules/userModule'
+import orderModule from './modules/orderModule'
 
 Vue.use(Vuex)
 export const store = new Vuex.Store({
@@ -11,7 +12,8 @@ export const store = new Vuex.Store({
   modules: {
     products: productsModule,
     customer: customerModule,
-    user: userModule
+    user: userModule,
+    order: orderModule
   },
   mutations: {},
   actions: {},

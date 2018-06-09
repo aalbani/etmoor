@@ -2,13 +2,17 @@ import firebase from '../firebase/firestore'
 
 // LEVEL 0 : CUSTOMER, LEVEL 1 :  PROVIDOR, LEVEL 2 : ADMIN.
 const state = {
+  email: null,
+  uid: null,
   user: null,
   loading: false,
   error: null
 }
 const mutations = {
   setUser (state, payload) {
-    state.user = payload
+    state.user = payload.user
+    state.email = payload.email
+    state.uid = payload.uid
   },
   setLoading (state, payload) {
     state.loading = payload
@@ -18,12 +22,15 @@ const mutations = {
   },
   clearError (state, payload) {
     state.error = payload
+  },
+  addOrder (state, payload) {
+    state.user.orders.push(payload)
   }
 }
 const actions = {
   signupNewUser ({commit}, userInfo) {
     commit('setLoading', true)
-    firebase.signupNewUser(userInfo, newUser => {
+    return firebase.signupNewUser(userInfo, newUser => {
       commit('setLoading', false)
       commit('setUser', newUser)
     })
@@ -52,6 +59,9 @@ const actions = {
   },
   clearError ({commit}) {
     commit('clearError', null)
+  },
+  addLocationAndOrder ({getters}, orderForm) {
+    return firebase.updateUser(getters.uidAndEmail, orderForm)
   }
 }
 const getters = {
@@ -69,6 +79,16 @@ const getters = {
   },
   error (state) {
     return state.error
+  },
+  orders (state) {
+    return state.user.orders
+  },
+  uidAndEmail (state) {
+    const info = {
+      email: state.email,
+      uid: state.uid
+    }
+    return info
   }
 }
 

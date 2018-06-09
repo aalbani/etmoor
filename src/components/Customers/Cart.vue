@@ -62,11 +62,6 @@
 
 <script>
     export default {
-        data() {
-            return {
-                okey : false
-            }
-        },
         computed: {
             customer() {
                return this.$store.getters['customer/getCustomer']
@@ -94,7 +89,7 @@
         }
     }
 </script>
-<style>
+<style scoped>
 .headline {
   font-family: 'El Messiri', 'sans-serif';
   font-weight: bold ;
