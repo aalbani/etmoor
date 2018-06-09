@@ -61,7 +61,8 @@ const actions = {
     commit('clearError', null)
   },
   addLocationAndOrder ({getters}, orderForm) {
-    return firebase.updateUser(getters.uidAndEmail, orderForm)
+    console.log(getters.uidAndEmail.uid, orderForm)
+    return firebase.updateUser(getters.uidAndEmail.uid, orderForm)
   }
 }
 const getters = {

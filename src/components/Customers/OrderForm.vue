@@ -141,10 +141,10 @@
               alert('شكرا لطلبك من إي تمور , سيتم التواصل معك قريبا')
               this.$store.dispatch('user/addLocationAndOrder', newOrderForm)
               this.$store.dispatch('products/updateInventory')
+              this.$store.dispatch('customer/reset')
               this.$router.push('/')
             })
-            .catch(err => alert('الرجاء المحاولة مرة أخرى') )
-            
+            .catch(err => console.log(err) )
           }
         },
       clear () {

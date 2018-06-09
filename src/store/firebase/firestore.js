@@ -82,7 +82,7 @@ export default {
           const loginUser = {
             user: data.data(),
             email: loginInfo.email,
-            uid: data.uid
+            uid: user.uid
           }
           cb(loginUser)
         })
@@ -99,14 +99,14 @@ export default {
     })
   },
   updateUser (uid, form) {
-    return firebase.collection('USER').doc(uid).update({
-      orders: this.orders.push(form.order),
+    console.log(uid, form)
+    return firestore.collection('USER').doc(uid).update({
+      orders: form.order,
       location: {
         firstName: form.firstName,
         lastName: form.lastName,
         phoneNumber: form.phoneNumber,
-        country: form.country,
-        region: form.city,
+        region: form.region,
         hood: form.hood
       }
     })
