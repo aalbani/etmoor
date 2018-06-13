@@ -5,14 +5,24 @@ import firebase from '../firebase/firestore'
 const state = {
   orders: null,
   loading: false,
-  count: null
+  count: {
+    totalCount: 0,
+    northCount: 0,
+    southCount: 0,
+    eastCount: 0,
+    westCount: 0,
+    centerCount: 0,
+    outCount: 0
+  }
 }
 const mutations = {
   setCount (state, payload) {
     state.count = payload
+    console.log(state.count)
   },
   setOrders (state, payload) {
     state.orders = payload
+    console.log(state.orders)
   }
 }
 const actions = {
@@ -20,13 +30,21 @@ const actions = {
     return firebase.addNewOrder(orderForm)
   },
   initDashboard ({ commit }) {
-    firebase.getOrders([], cb => {
+    return firebase.getOrdersAndCounts()
+    .then(cb => {
+      console.log(cb)
       commit('setOrders', cb.array)
       commit('setCount', cb.count)
     })
   }
 }
 const getters = {
+  orders (state) {
+    return state.orders
+  },
+  count (state) {
+    return state.count
+  }
 }
 
 export default {

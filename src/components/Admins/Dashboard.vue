@@ -5,7 +5,7 @@
         <v-card color="deep-orange darken-1" dark>
           <v-flex xs12 mx-4 ma-4>
           <v-card-title primary class="title justify-center">Orders on Hold</v-card-title>
-          <v-card-text class="title text-xs-center">2056</v-card-text>
+          <v-card-text class="title text-xs-center">{{count.totalCount}}</v-card-text>
           </v-flex>
         </v-card>
       </v-flex>
@@ -53,19 +53,29 @@
 <script>
   export default {
     data: () => ({
-      lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
-      riyadh : [
-        {regionName: 'Riyadh North', orderCount: '15'},
-        {regionName: 'Riyadh South', orderCount: '2'},
-        {regionName: 'Riyadh East', orderCount: '33'},
-        {regionName: 'Riyadh West', orderCount: '20'},
-        {regionName: 'Riyadh Mid', orderCount: '9'},
-        {regionName: 'Outside', orderCount: '120'}
-      ],
       inventory : [
         {type: 'sokry', remaining: 2},
         {type: 'khalas', remaining: 3}
       ]
-    })
+    }),
+    computed : {
+      count() {
+        return this.$store.getters['order/count']
+      },
+      riyadh() {
+      let riyadh = [
+        {regionName: 'Riyadh North', orderCount: this.count.northCount},
+        {regionName: 'Riyadh South', orderCount: this.count.southCount},
+        {regionName: 'Riyadh East', orderCount: this.count.eastCount},
+        {regionName: 'Riyadh West', orderCount: this.count.westCount},
+        {regionName: 'Riyadh Mid', orderCount: this.count.centerCount},
+        {regionName: 'Outside', orderCount: this.count.outCount}
+      ]
+      return riyadh
+      }
+    },
+    created () {
+    this.$store.dispatch('order/initDashboard')
+    }
   }
 </script>
