@@ -45,6 +45,17 @@ const getters = {
   },
   getLoading (state) {
     return state.loading
+  },
+  inventory (state) {
+    let array = []
+    state.products.forEach(product => {
+      let inventoryAndName = {
+        dateType: product.dateType,
+        inventory: product.inventory
+      }
+      array.push(inventoryAndName)
+    })
+    return array
   }
 }
 

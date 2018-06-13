@@ -36,7 +36,7 @@
         </v-flex>
           <v-flex xs12 v-for="item in inventory" :key="item.type">
           <v-card color="grey darken-3" dark>
-          <v-card-text>{{item.type}} : <span class="red--text">{{item.remaining}}</span> in inventory</v-card-text>
+          <v-card-text>{{item.dateType}} : <span class="red--text">{{item.inventory}}</span> in inventory</v-card-text>
         </v-card>
           </v-flex>
         </v-layout>
@@ -52,15 +52,12 @@
 </template>
 <script>
   export default {
-    data: () => ({
-      inventory : [
-        {type: 'sokry', remaining: 2},
-        {type: 'khalas', remaining: 3}
-      ]
-    }),
     computed : {
       count() {
         return this.$store.getters['order/count']
+      },
+      inventory() {
+        return this.$store.getters['products/inventory']
       },
       riyadh() {
       let riyadh = [
@@ -74,7 +71,7 @@
       return riyadh
       }
     },
-    created () {
+    mounted () {
     this.$store.dispatch('order/initDashboard')
     }
   }
