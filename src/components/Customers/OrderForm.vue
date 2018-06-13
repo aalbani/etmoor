@@ -97,10 +97,10 @@
       email: '',
       hood: '',
       region: '',
-      city: null,
-      hood: null,
-      cities: ['الرياض'],
-      regions: ['شمال الرياض','شرق الرياض','غرب الرياض','جنوب الرياض','وسط الرياض'],
+      city: '',
+      hood: '',
+      cities: ['الرياض','خارج الرياض'],
+      regions: ['شمال الرياض','شرق الرياض','غرب الرياض','جنوب الرياض','وسط الرياض','أخرى'],
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
@@ -131,7 +131,8 @@
               firstName: this.firstName,
               lastName: this.lastName,
               phoneNumber: this.phoneNumber,
-              region: this.city,
+              city: this.city,
+              region: this.region,
               hood: this.hood,
               order: this.order
             }

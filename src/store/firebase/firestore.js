@@ -99,7 +99,6 @@ export default {
     })
   },
   updateUser (uid, form) {
-    console.log(uid, form)
     return firestore.collection('USER').doc(uid).update({
       orders: form.order,
       location: {
@@ -108,7 +107,45 @@ export default {
         phoneNumber: form.phoneNumber,
         region: form.region,
         hood: form.hood
+      },
+      getProducts (array, cb) {
+        firestore.collection('ORDER').get()
+          .then(querySnapshot => {
+            const count = {
+              totalCount: 0,
+              northCount: 0,
+              southCount: 0,
+              eastCount: 0,
+              westCount: 0,
+              centerCount: 0,
+              outCount: 0
+            }
+            querySnapshot.forEach(document => {
+              count.totalCount++
+              if (document.order.region === 'شرق الرياض') {
+                count.eastCount++
+              }
+              if (document.order.region === 'غرب الرياض') {
+                count.westCount++
+              }
+              if (document.order.region === 'شمال الرياض') {
+                count.northCount++
+              }
+              if (document.order.region === 'جنوب الرياض') {
+                count.southCount++
+              }
+              if (document.order.region === 'وسط الرياض') {
+                count.centerCount++
+              }
+              if (document.order.region === 'أخرى') {
+                count.outCount++
+              }
+              array.push(document)
+            })
+            cb(array, count)
+          }).catch(error => console.log(error))
       }
+
     })
   }
 }
