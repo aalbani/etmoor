@@ -107,7 +107,8 @@ export default {
         lastName: form.lastName,
         phoneNumber: form.phoneNumber,
         region: form.region,
-        hood: form.hood
+        hood: form.hood,
+        orderDate: form.orderDate
       }
     })
   },

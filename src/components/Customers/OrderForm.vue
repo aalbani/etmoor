@@ -134,7 +134,8 @@
               city: this.city,
               region: this.region,
               hood: this.hood,
-              order: this.order
+              order: this.order,
+              orderDate: new Date()
             }
             console.log(newOrderForm)
             this.$store.dispatch('order/addNewOrder', newOrderForm)
