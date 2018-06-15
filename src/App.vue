@@ -163,8 +163,8 @@ export default {
       if (this.userIsAuth && this.authLevel === 1) {
       menuItems = [
         {id: '00', icon: 'dashboard', title: 'Dashboard', link: '/admins/dashboard'},
-        {id: '01', icon: 'watch_later', title: 'Tasks', link: '/admins/tasks'},        
-        {id: '02', icon: 'local_shipping', title: 'Delivery', link: '/admins/deliveries'},
+        {id: '01', icon: 'local_shipping', title: 'Delivery', link: '/admins/deliveries'},
+        {id: '02', icon: 'watch_later', title: 'Tasks', link: '/admins/tasks'},        
         {id: '03', icon: 'person', title: 'Complaints', link: '/admins/complaints'},
         {id: '04', icon: 'storage', title: 'Inventory', link: '/admins/inventory'},
         {id: '05', icon: 'schedule', title: 'History', link: '/admins/historyRecord'},
